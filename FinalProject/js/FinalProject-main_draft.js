@@ -32,7 +32,7 @@ var dataset3 = "https://raw.githubusercontent.com/wenhaowuuu/FinalProject/master
 var filterFunction;
 
 ///LATIN AMERICA SHP
-var boundarydataset = "";
+var boundarydataset = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
 
 $.ajax(boundarydataset).done(function(data){
   var parsedbound = JSON.parse(data);
