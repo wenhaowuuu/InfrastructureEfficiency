@@ -12,8 +12,8 @@
 
 //////////////////////////////////////PART 1  MAP SET UP////////////////////////////////////////////////////
 var map = L.map('map', {
-  center: [3.9670, -74.5370],
-  zoom: 3.5
+  center: [15.162820, -90.509107],
+  zoom: 7
 });
 
  var layerMappedMarkers;
@@ -32,36 +32,56 @@ var dataset3 = "https://raw.githubusercontent.com/wenhaowuuu/FinalProject/master
 var filterFunction;
 
 ///LATIN AMERICA SHP
-var boundarydataset = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
+var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
 
-$.ajax(boundarydataset).done(function(data){
-  var parsedbound = JSON.parse(data);
-  console.log("parsed");
+var northtriangle = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/guatemala.geojson";
 
-})
+
+$(document).ready(function(){
+  $.ajax(southamerica).done(function(data) {
+    parsedData10 = JSON.parse(data);
+    console.log(parsedData10);
+    console.log("parsed10");
+    console.log(parsedData10.features[0].properties.country);
+    layerMappedPolygons = _.each(parsedData10,function(item){
+      L.geoJson(parsedData10,
+        {
+          pointToLayer: function (feature, latlngs) {
+            return new L.Polygon(latlngs, {
+            })
+          }
+        }).addTo(map).bindPopup("text");
+    });
+    });
+});
+
+// bindPopup(feature.properties.country);
+
+$(document).ready(function(){
+  $.ajax(northtriangle).done(function(data) {
+    parsedData9 = JSON.parse(data);
+    console.log(parsedData9);
+    console.log("parsed9");
+    // console.log(parsedData9.features.features[0].properties.shape_area);
+    layerMappedPolygons = L.geoJson(parsedData9,
+      {
+        // style: myStyle2,
+        // filter: myFilter2,
+        pointToLayer: function (feature, latlngs) {
+          return new L.Polygon(latlngs, {
+            });
+          }
+      }).addTo(map).bindPopup("Guatemala");
+    });
+});
+
+
+// feature.properties.provincie);
 
 
 // following geojson from shapescape is not useful!!
 // var latinamerica = "http://www.shpescape.com/mix/uploads/b7670c7f9d629a6e1d304a75b01c2cba.json/";
 // var BRTline = "http://www.shpescape.com/mix/uploads/7709b655cd6a057947e63d0cced5a8c7.json/";
-//
-// $.ajax(BRTline).done(function(data){
-//   console.log(data);
-//   var linestring = turf.lineString(_.map(data,function(data){
-//   return data.reverse();}));
-//   console.log("reversed");
-//   //CONVERT TO GEOJSON LINE//
-//   var lineStyle = {
-//     "color": "red",
-//     "weight": 3,
-//     "opacity":0.75,
-//     "dashArray": "8 8"
-//   };
-//   var BRTRoute = L.geoJSON(linestring,{
-//     style:lineStyle
-//   }).addTo(map);
-//
-// })
 
 
 //LOAD BRT lines
@@ -92,12 +112,6 @@ $.ajax(boundarydataset).done(function(data){
   //       });
   //     });
   //   });
-
-
-
-
-
-
 
 L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', {
   maxZoom: 18,
@@ -183,6 +197,8 @@ L.marker([10.395132, -75.485867]).addTo(map).bindPopup("Cartagena, Colombia");
 L.marker([8.997980, -79.527990]).addTo(map).bindPopup("Panama City, Panama");
 L.marker([-0.183847, -78.490285]).addTo(map).bindPopup("Quito, Ecuador");
 L.marker([9.931887, -84.085539]).addTo(map).bindPopup("San Jose, Costa Rica");
+L.marker([14.629373, -90.513847]).addTo(map).bindPopup("Guatemala City, Guatemala");
+
 
 
 
@@ -227,8 +243,8 @@ var state = {
   slideNumber: 0,
   slideData:[
     {
-      "name": "The Original List of Latin American Cities",
-      "content": "Here presented are economic development data for the 31 national capital cities in Latin America.",
+      "name": "Country",
+      "content": "Here presented are some quick statistics about infrastructure efficiency in the country you selected.",
     },
     {
       "name": "Cities with the Highest GDP",
