@@ -32,27 +32,36 @@ var dataset3 = "https://raw.githubusercontent.com/wenhaowuuu/FinalProject/master
 var filterFunction;
 
 ///LATIN AMERICA SHP
+var boundarydataset = "";
+
+$.ajax(boundarydataset).done(function(data){
+  var parsedbound = JSON.parse(data);
+  console.log("parsed");
+
+})
+
+
 // following geojson from shapescape is not useful!!
 // var latinamerica = "http://www.shpescape.com/mix/uploads/b7670c7f9d629a6e1d304a75b01c2cba.json/";
 // var BRTline = "http://www.shpescape.com/mix/uploads/7709b655cd6a057947e63d0cced5a8c7.json/";
-
-$.ajax(BRTline).done(function(data){
-  console.log(data);
-  var linestring = turf.lineString(_.map(data,function(data){
-  return data.reverse();}));
-  console.log("reversed");
-  //CONVERT TO GEOJSON LINE//
-  var lineStyle = {
-    "color": "red",
-    "weight": 3,
-    "opacity":0.75,
-    "dashArray": "8 8"
-  };
-  var BRTRoute = L.geoJSON(linestring,{
-    style:lineStyle
-  }).addTo(map);
-
-})
+//
+// $.ajax(BRTline).done(function(data){
+//   console.log(data);
+//   var linestring = turf.lineString(_.map(data,function(data){
+//   return data.reverse();}));
+//   console.log("reversed");
+//   //CONVERT TO GEOJSON LINE//
+//   var lineStyle = {
+//     "color": "red",
+//     "weight": 3,
+//     "opacity":0.75,
+//     "dashArray": "8 8"
+//   };
+//   var BRTRoute = L.geoJSON(linestring,{
+//     style:lineStyle
+//   }).addTo(map);
+//
+// })
 
 
 //LOAD BRT lines
@@ -547,7 +556,7 @@ $(document).ready(function() {
 //////ZOOM INTO BEIJING REAL ESTATE DATA//////
 // ////BEIJING REAL ESTATE DATA////
 $(document).ready(function() {
-  $('#beijing').click(function(){
+  $('#bogota').click(function(){
     $.ajax(dataset2).done(function(data) {
       parsedData2 = JSON.parse(data);
       layerMappedMarkers = L.geoJson(parsedData2,{
@@ -566,6 +575,7 @@ $(document).ready(function() {
           });
         }
       }).addTo(map);
+      // map.setCenter(4.678396, -74.083786);
       map.fitBounds(layerMappedMarkers.getBounds(),{
         padding: [10,10]
       });
