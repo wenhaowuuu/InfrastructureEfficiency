@@ -123,6 +123,8 @@ var municipality = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureE
 var highschool = "http://services2.arcgis.com/So9L2GYDzmW40U1b/ArcGIS/rest/services/High_Schools_in_Triangulo_Norte/FeatureServer/0?f=pjson";
 
 
+var municipality1 = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
+
 $(document).ready(function(){
   $.ajax(southamerica).done(function(data) {
     parsedData10 = JSON.parse(data);
@@ -153,8 +155,6 @@ $(document).ready(function(){
     // console.log(parsedData9.features.features[0].properties.shape_area);
     layerMappedPolygons = L.geoJson(parsedData11,
       {
-        // style: myStyle2,
-        // filter: myFilter2,
         pointToLayer: function (feature, latlngs) {
           return new L.Polygon(latlngs, {
             });
@@ -165,24 +165,42 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
-  $.ajax(highschool).done(function(data) {
-    parsedData12 = JSON.parse(data);
-    console.log(parsedData12);
-    console.log("parsed12");
-    // console.log(parsedData12.features[0].properties.country);
-    layerMappedPolygons = _.each(parsedData12,function(item){
-      L.geoJson(parsedData12,
-        {
-          pointToLayer: function (feature, latlngs) {
-            return new L.Polygon(latlngs, {
-            }
-          );
-        }}
-      ).addTo(map).bindPopup("text");
-    }
-  );
-  });
+  $.ajax(municipality1).done(function(data) {
+    parsedData111 = JSON.parse(data);
+    // console.log(parsedData9.features.features[0].properties.shape_area);
+    layerMappedPolygons = L.geoJson(parsedData111,
+      {
+        pointToLayer: function (feature, latlngs) {
+          return new L.Polygon(latlngs, {
+            });
+          }
+      }).addTo(map0).bindPopup("Guatemala is a country in Central America");
+    });
 });
+
+//LOAD HIGHSCHOOL POINTS
+// $(document).ready(function(){
+//   $.ajax(highschool).done(function(data) {
+//     parsedData12 = JSON.parse(data);
+//     console.log(parsedData12);
+//     console.log("parsed12");
+//     // console.log(parsedData12.features[0].properties.country);
+//     layerMappedPolygons = _.each(parsedData12,function(item){
+//       L.geoJson(parsedData12,
+//         {
+//           pointToLayer: function (feature, latlngs) {
+//             return new L.Polygon(latlngs, {
+//             }
+//           );
+//         }}
+//       ).addTo(map).bindPopup("text");
+//     }
+//   );
+//   });
+// });
+
+
+
 
 // feature.properties.provincie);
 // $(document).ready(function(){
