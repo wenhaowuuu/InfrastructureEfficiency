@@ -12,7 +12,7 @@
 
 //////////////////////////////////////PART 1  MAP SET UP////////////////////////////////////////////////////
 var map = L.map('map', {
-  center: [15.162820, -90.509107],
+  center: [15.162820, -89.509107],
   zoom: 7
 });
 
@@ -155,7 +155,7 @@ $(document).ready(function(){
           return new L.Polygon(latlngs, {
             });
           }
-      }).addTo(map).bindPopup("Guatemala");
+      }).addTo(map).bindPopup("Guatemala is a country in Central America");
     });
 });
 

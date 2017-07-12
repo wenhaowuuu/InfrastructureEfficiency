@@ -10,10 +10,23 @@ body {
   z-index:50;
 }
 
-/*.charts{
-  position:relative;
-}*/
+div.description{
+  position:absolute;
+  top:560px;
+  right:20px;
+  width:300px;
+  background-color: rgba(171, 150, 150, .4);
+  filter:alpha(opacity=30);
+  z-index: 30;
 
+}
+
+div.description p {
+    color:rgba(245, 240, 240, .6);
+    font-size: 14px;
+    margin:15px;
+    z-index:60;
+}
 
 @font-face {
 font-family: 'Glyphicons Halflings';
