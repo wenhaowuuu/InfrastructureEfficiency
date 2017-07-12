@@ -26,10 +26,17 @@
               </ul>
           </div>
     </div>
-    <div style="position: absolute; over-flow:auto; left: 4px; heigt: 1500px; width: 400px; top: 30px; bottom: 0;z-index:50;">
+    <!-- <div style="display: block;overflow: auto; position: absolute; left: 0px; width: 1440px; top: 0; bottom: 0;" data-bottom="false"> -->
+<!--  -->
+    <div style="display: block; over-flow:auto; position: absolute; left: 4px; width: 400px; top: 30px; data-bottom="false" z-index:50;">
         <h1 class = "main-heading"><strong>INFRASTRUCTURE EFFICIENCY </strong> in <br><strong id = "color"> Guatemala </strong></h1>
         <!-- <h2 id="slidenumber">Slide</h2> -->
             <img id = "image" src="http://static.thousandwonders.net/Bogota.original.360.jpg">
+            <!-- <img id = "image" src="http://static.thousandwonders.net/Bogota.original.360.jpg">
+            <img id = "image" src="http://static.thousandwonders.net/Bogota.original.360.jpg">
+            <img id = "image" src="http://static.thousandwonders.net/Bogota.original.360.jpg">
+            <img id = "image" src="http://static.thousandwonders.net/Bogota.original.360.jpg">
+            <img id = "image" src="http://static.thousandwonders.net/Bogota.original.360.jpg"> -->
             <!-- <br> -->
             <!-- <br> -->
             <!-- <button id = "next" type = "button"> NEXT </button>
@@ -38,6 +45,19 @@
         <!-- <br>
         <button id = "back" type = "button" style="display: none;"> BACK TO ORIGINAL </button>
         <br> -->
+        <br>
+        <br>
+        <div class="search" style="display:inline-block;">
+          <label for="dest">Enter a Country</label>
+          <input id="country" type="text">
+          <!-- <button class="button" id="Search">Search</button> -->
+        </div>
+
+        <div class="search" style="display:inline-block;">
+          <label for="dest">Select a Province</label>
+          <input id="country" type="text">
+        </div>
+        <br>
         <br>
         <br>
         <div class='explanation'>
@@ -132,7 +152,9 @@ below to change basemaps of the provinces
         <p>This box area on the bottom-right is reserved for summary escription of the graphs, charts and statistics. Linked with the user-input parameters received from the web-front. </p>
       </div>
 
-
+      <div class="download">
+        <p>This box area on the bottom-right is reserved for summary escription of the graphs, charts and statistics. Linked with the user-input parameters received from the web-front. </p>
+      </div>
 
 
       <!-- <div id="legend">
