@@ -120,6 +120,7 @@ var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureE
 // var northtriangle = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/guatemala.geojson";
 
 var municipality = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
+var highschool = "http://services2.arcgis.com/So9L2GYDzmW40U1b/ArcGIS/rest/services/High_Schools_in_Triangulo_Norte/FeatureServer/0?f=pjson";
 
 
 $(document).ready(function(){
@@ -162,6 +163,26 @@ $(document).ready(function(){
     });
 });
 
+
+$(document).ready(function(){
+  $.ajax(highschool).done(function(data) {
+    parsedData12 = JSON.parse(data);
+    console.log(parsedData12);
+    console.log("parsed12");
+    // console.log(parsedData12.features[0].properties.country);
+    layerMappedPolygons = _.each(parsedData12,function(item){
+      L.geoJson(parsedData12,
+        {
+          pointToLayer: function (feature, latlngs) {
+            return new L.Polygon(latlngs, {
+            }
+          );
+        }}
+      ).addTo(map).bindPopup("text");
+    }
+  );
+  });
+});
 
 // feature.properties.provincie);
 // $(document).ready(function(){

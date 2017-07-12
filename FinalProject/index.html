@@ -12,8 +12,30 @@
     <link rel="stylesheet" href="css/style.css">
 
 
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map0 { position:absolute; left:400px; right:0; top:600px; bottom:0; }
+    </style>
+
   </head>
   <body>
+    <div id='map0'></div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoid2VuaGFvYnJpYW4iLCJhIjoiY2owaXNrNzhnMDB4ZjJxdGoxdHdkd2VibiJ9.Cn_2Ypo7UctdNZHt6OlDHA';
+    var map = new mapboxgl.Map({
+        container: 'map0', // container id
+        style: 'mapbox://styles/mapbox/satellite-v9', //stylesheet location
+        center: [-88.509107, 15.162820], // starting position
+        zoom: 5.5 // starting zoom
+    });
+    </script>
+
+
     <!--Left Panel-->
     <div id = "header">
       <p id = "header_text"><strong>GEOADAPTIVE &nbsp; </strong></p>
@@ -28,6 +50,7 @@
     </div>
     <!-- <div style="display: block;overflow: auto; position: absolute; left: 0px; width: 1440px; top: 0; bottom: 0;" data-bottom="false"> -->
 <!--  -->
+    <!-- LEFT SIDE BAR PLANE -->
     <div style="display: block; over-flow:auto; position: absolute; left: 4px; width: 400px; top: 30px; data-bottom="false" z-index:50;">
         <h1 class = "main-heading"><strong>INFRASTRUCTURE EFFICIENCY </strong> in <br><strong id = "color"> North Traingle </strong></h1>
         <!-- <h2 id="slidenumber">Slide</h2> -->
@@ -106,10 +129,7 @@
             </tr>
          </table>
       </div> -->
-
-
-      <div>
-    <div id="map" style="position: absolute; right:0; left: 400px; top: 30px; bottom: 600px;z-index:10;">  </div>
+    <div id="map" style="position: absolute; right:0; left: 400px; top: 30px; height:60%; z-index:10;"></div>
       <div class="dropdown1">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Change BaseMap
@@ -122,12 +142,6 @@
               <li id = "eco"><a href="#">Eco</a></li>
               <li id = "midnight"><a href="#">Midnight</a></li>
           </ul>
-<!--
-below to change basemaps of the provinces
-          <button id = "GDPshare" style ="margin-left:15px;">GDP Share</li>
-          <button id = "GDPrate" style ="margin-left:15px;">GDP Growth Rate</li>
-          <button style ="margin-left:15px;">Investment</li> -->
-
       </div>
         <br>
         <br>
@@ -160,7 +174,7 @@ below to change basemaps of the provinces
       </div>
 
 
-      <div id="legend">
+      <div class="legend">
           <h5>GDP Growth Rate of Provinces</h5>
           <div>
             <div class = label1 id = fill1></div><p class = label1> < 7.7% (target rate)</p>
