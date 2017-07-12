@@ -119,6 +119,8 @@ var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureE
 
 var northtriangle = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/guatemala.geojson";
 
+var municipality = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
+
 
 $(document).ready(function(){
   $.ajax(southamerica).done(function(data) {
@@ -141,13 +143,14 @@ $(document).ready(function(){
 });
 // bindPopup(feature.properties.country);
 
+
 $(document).ready(function(){
-  $.ajax(northtriangle).done(function(data) {
-    parsedData9 = JSON.parse(data);
-    console.log(parsedData9);
-    console.log("parsed9");
+  $.ajax(municipality).done(function(data) {
+    parsedData11 = JSON.parse(data);
+    console.log(parsedData11);
+    console.log("parsed11");
     // console.log(parsedData9.features.features[0].properties.shape_area);
-    layerMappedPolygons = L.geoJson(parsedData9,
+    layerMappedPolygons = L.geoJson(parsedData11,
       {
         // style: myStyle2,
         // filter: myFilter2,
@@ -161,6 +164,25 @@ $(document).ready(function(){
 
 
 // feature.properties.provincie);
+// $(document).ready(function(){
+//   $.ajax(southamerica).done(function(data) {
+//     parsedData10 = JSON.parse(data);
+//     console.log(parsedData10);
+//     console.log("parsed10");
+//     console.log(parsedData10.features[0].properties.country);
+//     layerMappedPolygons = _.each(parsedData10,function(item){
+//       L.geoJson(parsedData10,
+//         {
+//           pointToLayer: function (feature, latlngs) {
+//             return new L.Polygon(latlngs, {
+//             }
+//           );
+//         }}
+//       ).addTo(map).bindPopup("text");
+//     }
+//   );
+//   });
+// });
 
 
 // following geojson from shapescape is not useful!!
