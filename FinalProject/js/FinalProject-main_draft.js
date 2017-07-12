@@ -13,7 +13,7 @@
 //////////////////////////////////////PART 1  MAP SET UP////////////////////////////////////////////////////
 var map = L.map('map', {
   center: [15.162820, -87.509107],
-  zoom: 7
+  zoom: 6.5
 });
 
 var layerMappedMarkers;
@@ -149,21 +149,128 @@ $(document).ready(function(){
 });
 // bindPopup(feature.properties.country);
 
+//DEFINE A COLOR FUNCTION HERE
+
+
+// $(document).ready(function(){
+//   $.ajax(municipality).done(function(data) {
+//     parsedData11 = JSON.parse(data);
+//     console.log(parsedData11);
+//     console.log("parsed11");
+//     layerMappedPolygons = L.geoJson(parsedData11,
+//       {
+//         pointToLayer: function (feature, latlngs) {
+//           return new L.Polygon(latlngs, {
+//             });
+//           }
+//       }).addTo(map).bindPopup("Guatemala is a country in Central America");
+//     });
+// });
+
+//GET COLOR FUNCTION
+
+// function getColor(d) {
+//   return d = 'Vivienda saludable' ? '#a6cee3' :
+//          d = 'Programa OPAS- 1969, Prevención de conflictos, desarrollo de acuerdos y construcción de la paz en comunidades con personas internamente desplazadas en Chiapas, México'  ? '#1f78b4' :
+//          d = 'Familias fuertes, amor y límites'  ? '#b2df8a' :
+//          d = 'e-Health, acceso a servicios médicos de telemedicina en comunidades indígenas en extrema pobreza'  ? '#33a02c' :
+//          d = 'Casas maternas'   ? '#fb9a99' :
+//              '#FFEDA0';
+//          }
+
+
+var myStyle = function(feature){
+  var pov = feature.properties.gen_pov;
+  switch(true){
+    case (pov < 10):return{color:"#EFC4AF"};
+    case (pov >= 10 && pov < 30):return{color:"#D48F6E"};
+    case (pov >= 30 && pov < 50):return{color:"#DB7849"};
+    case (pov >= 50 && pov < 75):return{color:"#ED692A"};
+    case (pov >= 75):return{color:"#F33105"};
+  }
+  return {};
+};
+
+//USE  OPACITY TO DEFINE
+// var myStyle = function(feature){
+//   var pov = feature.properties.gen_pov;
+//   switch(true){
+//     case (pov < 10):return{opacity:0.15};
+//     case (pov >= 10 && pov < 30):return{opacity:0.3};
+//     case (pov >= 30 && pov < 50):return{opacity:0.45};
+//     case (pov >= 50 && pov < 75):return{opacity:0.6};
+//     case (pov >= 70):return{opacity:0.75};
+//   }
+//   return {};
+// };
+
+
+
+// var featureGroup = L.geoJson(parsedData, {
+//   style: myStyle,
+//   filter: myFilter
+// }).addTo(map).bindPopup("THIS AREA");
+
+
+
 
 $(document).ready(function(){
-  $.ajax(municipality).done(function(data) {
-    parsedData11 = JSON.parse(data);
-    console.log(parsedData11);
-    console.log("parsed11");
-    layerMappedPolygons = L.geoJson(parsedData11,
+  $.ajax(municipality1).done(function(data) {
+    parsedData13 = JSON.parse(data);
+    console.log(parsedData13);
+    console.log("parsed13");
+    var layerMappedPolygons = L.geoJson(parsedData13,
       {
-        pointToLayer: function (feature, latlngs) {
-          return new L.Polygon(latlngs, {
-            });
+        style: myStyle,
+        pointToLayer: function (feature, latlng) {
+          return new L.Polygon(latlng, {
+          });
+        },
+
+        onEachFeature: function(feature,layer){
+            layer.bindPopup(
+              "<b>Municipality Name: </b>" +
+              feature.properties.m_name +
+              "</br>" +
+              "<b>Poverty Rate: </b>" +
+              feature.properties.gen_pov +
+              "</br>" +
+              "<b>Department Name: </b>" +
+              feature.properties.d_name +
+              "</br>" +
+              "<b>Data Collected Year: </b>" +
+              feature.properties.year
+            )
           }
-      }).addTo(map).bindPopup("Guatemala is a country in Central America");
+        }).addTo(map);
+      })
     });
-});
+
+
+///REFERENCE ON BINDING THE INFORMATION TO THE MARKERS
+// var puntos = L.geoJson(puntos_chiapas, {
+//     pointToLayer: function(feature, latlng) {
+//         return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85, color: getColor(feature.properties.Proyecto)});
+//     },
+//         onEachFeature: function (feature, layer) {
+//             layer.bindPopup(
+//                 "<b>Proyecto: </b>" +
+//                 feature.properties.Proyecto +
+//                 "</br>" +
+//                 "<b>Ubicación: </b>" +
+//                 feature.properties.Ubicación +
+//                 "</br>" +
+//                 "<b>Sector: </b>" +
+//                 feature.properties.Sector +
+//                 "</br>" +
+//                 "<b>Esquema: </b>" +
+//                 feature.properties.Esquema
+//             )
+//             }
+//
+//     });
+
+
 
 //TESTING ON LOADING ON THE SATELLITE IMAGE
 // $(document).ready(function(){
@@ -206,29 +313,6 @@ var schoolicon = L.icon({
 
 
 
-///REFERENCE ON BINDING THE INFORMATION TO THE MARKERS
-// var puntos = L.geoJson(puntos_chiapas, {
-//
-//     pointToLayer: function(feature, latlng) {
-//         return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85, color: getColor(feature.properties.Proyecto)});
-//     },
-//         onEachFeature: function (feature, layer) {
-//             layer.bindPopup(
-//                 "<b>Proyecto: </b>" +
-//                 feature.properties.Proyecto +
-//                 "</br>" +
-//                 "<b>Ubicación: </b>" +
-//                 feature.properties.Ubicación +
-//                 "</br>" +
-//                 "<b>Sector: </b>" +
-//                 feature.properties.Sector +
-//                 "</br>" +
-//                 "<b>Esquema: </b>" +
-//                 feature.properties.Esquema
-//             )
-//             }
-//
-//     });
 
 //
 // var icon = {

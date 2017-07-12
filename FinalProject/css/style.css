@@ -60,10 +60,10 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 
 .legend {
         position:absolute;
-        bottom:410px;
-        left:440px;
+        bottom:380px;
+        left:420px;
         width:180px;
-        height:200px;
+        height:220px;
         font-family: Arial, sans-serif;
         color:white;
         background-color: rgba(171, 150, 150, .4);
@@ -339,6 +339,48 @@ li{
 #fill1{
   position:relative;
   right:5px;
+  background-color:#EFC4AF;
+  height:10px;
+  width:20px;
+}
+
+#fill2{
+  position:relative;
+  right:5px;
+  background-color:#D48F6E;
+  height:10px;
+  width:20px;
+}
+
+#fill3{
+  position:relative;
+  right:5px;
+  background-color:#DB7849;
+  height:10px;
+  width:20px;
+}
+
+#fill4{
+  position:relative;
+  right:5px;
+  background-color:#ED692A;
+  height:10px;
+  width:20px;
+}
+
+#fill5{
+  position:relative;
+  right:5px;
+  background-color:#F33105;
+  height:10px;
+  width:20px;
+}
+
+
+/*//CHINESE GDP RATE*/
+/*#fill1{
+  position:relative;
+  right:5px;
   background-color:#486cd3;
   height:10px;
   width:20px;
@@ -358,7 +400,8 @@ li{
   background-color:#e73115;
   height:10px;
   width:20px;
-}
+}*/
+
 
 #next{
   position:relative;
