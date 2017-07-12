@@ -16,7 +16,7 @@ var map = L.map('map', {
   zoom: 7
 });
 
- var layerMappedMarkers;
+var layerMappedMarkers;
 var slideNumber = 0;
 var parsedData;
 var parsedData2;
@@ -30,6 +30,89 @@ var dataset3 = "https://raw.githubusercontent.com/wenhaowuuu/FinalProject/master
 // console.log("1st");
 
 var filterFunction;
+
+
+
+//LOAD CHARTS
+var ctx1 = document.getElementById("myChart1").getContext('2d');
+var myChart = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: 'GDP',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+
+//LOAD CHARTS 2
+var ctx2 = document.getElementById("myChart2").getContext('2d');
+var myChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: 'Population',
+            data: [5, 2, 8, 15, 10, 4],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+
 
 ///LATIN AMERICA SHP
 var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
@@ -48,13 +131,14 @@ $(document).ready(function(){
         {
           pointToLayer: function (feature, latlngs) {
             return new L.Polygon(latlngs, {
-            })
-          }
-        }).addTo(map).bindPopup("text");
-    });
-    });
+            }
+          );
+        }}
+      ).addTo(map).bindPopup("text");
+    }
+  );
+  });
 });
-
 // bindPopup(feature.properties.country);
 
 $(document).ready(function(){
