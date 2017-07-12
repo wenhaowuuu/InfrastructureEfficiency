@@ -125,6 +125,9 @@ var highschool = "http://services2.arcgis.com/So9L2GYDzmW40U1b/ArcGIS/rest/servi
 
 var municipality1 = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
 
+var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
+
+
 $(document).ready(function(){
   $.ajax(southamerica).done(function(data) {
     parsedData10 = JSON.parse(data);
@@ -152,7 +155,6 @@ $(document).ready(function(){
     parsedData11 = JSON.parse(data);
     console.log(parsedData11);
     console.log("parsed11");
-    // console.log(parsedData9.features.features[0].properties.shape_area);
     layerMappedPolygons = L.geoJson(parsedData11,
       {
         pointToLayer: function (feature, latlngs) {
@@ -163,20 +165,81 @@ $(document).ready(function(){
     });
 });
 
+//TESTING ON LOADING ON THE SATELLITE IMAGE
+// $(document).ready(function(){
+//   $.ajax(municipality1).done(function(data) {
+//     parsedData111 = JSON.parse(data);
+//     // console.log(parsedData9.features.features[0].properties.shape_area);
+//     layerMappedPolygons = L.geoJson(parsedData111,
+//       {
+//         pointToLayer: function (feature, latlngs) {
+//           return new L.Polygon(latlngs, {
+//             });
+//           }
+//       }).addTo(map0).bindPopup("Guatemala is a country in Central America");
+//     });
+// });
 
-$(document).ready(function(){
-  $.ajax(municipality1).done(function(data) {
-    parsedData111 = JSON.parse(data);
-    // console.log(parsedData9.features.features[0].properties.shape_area);
-    layerMappedPolygons = L.geoJson(parsedData111,
-      {
-        pointToLayer: function (feature, latlngs) {
-          return new L.Polygon(latlngs, {
-            });
-          }
-      }).addTo(map0).bindPopup("Guatemala is a country in Central America");
-    });
-});
+var schoolicon = L.icon({
+  iconUrl:'marker-icon.png',
+  iconSize:[10,10],
+  iconAnchor:[8,8],
+})
+
+//LOADING THE SCHOOL DATA
+// $(document).ready(function(){
+//   $.ajax(highschool).done(function(data) {
+//     parsedData12 = JSON.parse(data);
+//     console.log(parsedData12);
+//     console.log("parsed12");
+//     layerMappedPolygons = L.geoJson(parsedData12,
+//       {
+//         pointToLayer: function (feature, latlngs) {
+//           return new L.marker(latlngs, {
+//             icon:schoolicon// radius:10,
+//             // color:yellow,
+//             });
+//           }
+//       }).addTo(map).bindPopup("High Schools");
+//     });
+// });
+
+
+
+///REFERENCE ON BINDING THE INFORMATION TO THE MARKERS
+// var puntos = L.geoJson(puntos_chiapas, {
+//
+//     pointToLayer: function(feature, latlng) {
+//         return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85, color: getColor(feature.properties.Proyecto)});
+//     },
+//         onEachFeature: function (feature, layer) {
+//             layer.bindPopup(
+//                 "<b>Proyecto: </b>" +
+//                 feature.properties.Proyecto +
+//                 "</br>" +
+//                 "<b>Ubicación: </b>" +
+//                 feature.properties.Ubicación +
+//                 "</br>" +
+//                 "<b>Sector: </b>" +
+//                 feature.properties.Sector +
+//                 "</br>" +
+//                 "<b>Esquema: </b>" +
+//                 feature.properties.Esquema
+//             )
+//             }
+//
+//     });
+
+//
+// var icon = {
+//     url: "../res/sit_marron.png", // url
+//     scaledSize: new google.maps.Size(50, 50), // scaled size
+//     origin: new google.maps.Point(0,0), // origin
+//     anchor: new google.maps.Point(0, 0) // anchor
+// };
+
+
+
 
 //LOAD HIGHSCHOOL POINTS
 // $(document).ready(function(){
