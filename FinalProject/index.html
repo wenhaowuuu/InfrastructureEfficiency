@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css">
+<!--
+    <script type="text/javascript" src="jChartFX/jchartfx.system.js"></script>
+    <script type="text/javascript" src="jChartFX/jchartfx.coreVector.js"></script>
+    <! Uncomment this section to add extended User Interaction capabilities, including the End-User Menu.
+         The UI features require a jChartFX Plus license for deployment.
+    <script type="text/javascript" src="jChartFX/jchartfx.userinterface.js"></script>
+    <link rel="stylesheet" type="text/css" href="jchartfx.userinterface.css" />
+    -->
+    <!-- <link rel="stylesheet" type="text/css" href="jchartfx.attributes.css" />
+    <link rel="stylesheet" type="text/css" href="jchartfx.palette.css" />
+ -->
+
 
 
     <meta charset='utf-8' />
@@ -64,38 +76,74 @@
         <br> -->
         <br>
         <br>
+        <label for="dest">Look for a Municipality</label>
+        <br>
         <div class="search" style="display:inline-block;">
-          <label for="dest">Enter a Country</label>
-          <input id="country" type="text">
-          <br>
-          <label for="dest">Select a Province</label>
-          <input id="country" type="text">
-          <!-- <button class="button" id="Search">Search</button> -->
-        </div>
-
-        <div class="intro">
-          <div id="results" style="display: none;">
-            <h1 class="day-of-week">dayofweek</h1>
-            <p class="main">The country you selected has a population of <span class="day-of-week">
-            Day of Week</span>.</p>
-            <p class="annotation">Please be sure to leave your garbage outside on <span class="day-of-week">
-            Day of Week</span>. If this week is a federal holiday, leave your
-            garbage outside on the following day.</p>
+          <div style="display:inline-block;">
+            <div class="option" class="leaflet-bar">
+              <select name="basemaps" id="basemaps" onChange="changeBasemap(basemaps)">
+                <option value="Topographic">Country 1</option>
+                <option value="Streets">Country 2</option>
+                <option value="NationalGeographic">Country 3</option>
+                <option value="Oceans">Country 4</option>
+                <option value="Oceans1">Country 5</option>
+              </select>
+              <select name="basemaps" id="basemaps" onChange="changeBasemap(basemaps)">
+                <option value="Topographic">Municipal A</option>
+                <option value="Streets">Municipal B</option>
+                <option value="NationalGeographic">Municipal C</option>
+                <option value="Oceans">Municipal D</option>
+                <option value="Oceans1">Municipal E</option>
+              </select>
+            </div>
           </div>
+        </div>
 
-          <p>This text will be updated every time you click on an administrative district.</p>
+        <div style="position:absolute;left:5px;width:390px;top:510px;">
+          <div id="results" style="display: none;">
+            <!-- <h2 class="totallength">Total Road Length</h1>
+            <h2 class="typology">Typology</h1>
+            <br>
+            <h2 class="population">Total Population</h1>
+            <br>
+            <h2 class="Accessibility">Access to Major Institutions</h1>
+            <br> -->
+            <h4 id = "sidebar-heading"><strong>Description</strong></h4>
+            <p class="annotation">
+                <span class="glyphicon glyphicon glyphicon-star"></span>
+              The Municipality of <span id="LENGTH"><strong>City Name </strong></span> is located in the department of
+              <span id="POP"><strong> department name </strong></span>.
+              <br>
+                <span class="glyphicon glyphicon glyphicon-star"></span>
+              <span id="30PCT"><strong>gen_pov</strong></span> % of its population live in poverty.
+              <br>
+                <span class="glyphicon glyphicon glyphicon-star"></span>
+                <!-- <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> -->
+              Its dataset's ID is <span id="60PCT"><strong>ID</strong></span> and the data was collected in year
+              <span id="90PCT"><strong></strong></span>.
+              <!-- The municipality has <span class="LENGTH">length in km</span> of road network.
+              The municipality has <span class="POP">population in ml</span> population.
+              <span class="30PCT">population in ml</span> of its population are within a 30-minute distance to major hospitals.
+              <span class="60PCT">population in ml</span> of its population are within a 60-minute distance to major hospitals.
+              <span class="90PCT">population in ml</span> of its population are within a 90-minute distance to major hospitals. -->
+            </p>
+          </div>
+          <!-- <p class="annotation">
+            The municipality has <span class="LENGTH">length in km</span> of road network.
+            The municipality has <span class="POP">population in ml</span> population.
+            <span class="30PCT">population in ml</span> of its population are within a 30-minute distance to major hospitals.
+            <span class="60PCT">population in ml</span> of its population are within a 60-minute distance to major hospitals.
+            <span class="90PCT">population in ml</span> of its population are within a 90-minute distance to major hospitals.
+          </p> -->
+          <!-- <p>This text will be updated every time you click on an administrative district.</p> -->
         </div>
         <br>
         <br>
         <br>
-        <div class="explanation">
-            <h4 id = "sidebar-heading"></h4>
-            <p id = "sidebar-text"></p>
-        </div>
         <br>
         <br>
-        <div style = "position:relative;left:5px;width:390px;top:0;">
-            <p class = storylink> Click the markers to read statistics.</p>
+        <div style = "position:absolute;left:5px;width:390px;top:700px;">
+            <p class = storylink> Click the municipal boundaries to read statistics.</p>
             <p class = storylink> Learn More &nbsp;
                <a href="http://best-cities-china.org/best-performing-cities-china-2016.pdf">
                  <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
@@ -149,10 +197,14 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <!-- <li id = "global"><a href="#">Global</a></li> -->
-              <li id = "national"><a href="#">National</a></li>
-              <li id = "bogota"><a href="#">Bogota</a></li>
+              <li id = "Global"><a href="#">Global</a></li>
+              <li id = "Regional"><a href="#">Regional</a></li>
+              <li id = "AOI"><a href="#">AOI</a></li>
           </ul>
       </div>
+      <!-- <div class="rosechart" style="width:300px;height:200px;right:10px;display:inline-block">
+        <p>for the rose map scoring chart</p>
+      </div> -->
       <div class="chartsarea">
         <canvas class="charts" id="myChart1" width="300" height="200"></canvas>
         <br>

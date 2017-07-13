@@ -211,40 +211,17 @@ $(document).ready(function() {
 
 //////ZOOM INTO BEIJING REAL ESTATE DATA//////
 // ////BEIJING REAL ESTATE DATA////
-// $(document).ready(function() {
-//   $('#bogota').click(function(){
-//     $.ajax(dataset2).done(function(data) {
-//       parsedData2 = JSON.parse(data);
-//       layerMappedMarkers = L.geoJson(parsedData2,{
-//         pointToLayer: function (feature, latlng) {
-//
-//           html = "<div><p class = intro> Here is it<a href = 'https://en.wikipedia.org/wiki/'> Go search it!</a></p></div>";
-//           var popuptext = feature.properties.name + html + "<p class = listing> This property was built in </p>" +feature.properties.yearbuilt+ "<p class = listing> The price per sq meter is </p>" + "RMB " +feature.properties.priceperm2;
-//           return new L.Marker(latlng, {
-//             // Specify which custom icon you want to use
-//             icon: myIcon
-//           }).bindPopup(popuptext).addEventListener("click",
-//             function(e){
-//               DestLon = feature.geometry.coordinates[0];
-//               DestLat = feature.geometry.coordinates[1];
-//               console.log(DestLon,DestLat);
-//           });
-//         }
-//       }).addTo(map);
-//       // map.setCenter(4.678396, -74.083786);
-//       map.fitBounds(layerMappedMarkers.getBounds(),{
-//         padding: [10,10]
-//       });
-//       $('#national').click(function(){
-//         map.removeLayer(layerMappedMarkers);
-//       });
-//     });
-//   });
-// });
+$('#Global').click(function(){
+  map.setView([15.162820, -87.509107],2);
+});
 
+$('#Regional').click(function(){
+  map.setView([15.162820, -87.509107],5);
+});
 
-//3.3 UPDATING PAGESIDE TEXT function//////////////////////////////////////////PART  USER INPUT////////////////////////////////
-
+$('#AOI').click(function(){
+  map.setView([15.162820, -87.509107],6.5);
+});
 
 /////////////////////////////////PART 4  DEFINE ANNOTATION ELEMENTS///////////////////////
 //LOADING THE DESCRIPTION TEXT LINKED WITH THE SELECTED DATA
@@ -254,25 +231,13 @@ $(document).ready(function() {
     // <div id="results" style="display: none;">
     document.getElementById("results").style.display = "inline";
     console.log(layer.feature);
-      switch (layer.feature.properties.COLLDAY){
-        case 'MON':
-          $('.day-of-week').text('Monday');
-          break;
-        case 'TUE':
-          $('.day-of-week').text('Tuesday');
-          break;
-        case 'WED':
-          $('.day-of-week').text('Wednesday');
-          break;
-        case 'THU':
-          $('.day-of-week').text('Thursday');
-          break;
-        case 'FRI':
-          $('.day-of-week').text('Friday');
-          break;
-    }
-  });
-};
+      $('#LENGTH').text(layer.feature.properties.m_name);
+      $('#POP').text(layer.feature.properties.d_name);
+      $('#30PCT').text(layer.feature.properties.gen_pov);
+      $('#60PCT').text(layer.feature.properties.id);
+      $('#90PCT').text(layer.feature.properties.year);
+    })
+  };
 
 //EXECUTION OF THE ABOVE FUNCTION
 var myFilter = function(feature) {
@@ -285,14 +250,14 @@ var myFilter = function(feature) {
 };
 
 
-//LOAD CHARTS
+
 var ctx1 = document.getElementById("myChart1").getContext('2d');
 var myChart = new Chart(ctx1, {
     type: 'bar',
     data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [{
-            label: 'GDP',
+            label: 'ROSE MAP SCORE',
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.4)',
@@ -467,8 +432,10 @@ $(document).ready(function(){
             )
           }
         }).addTo(map);
+        layerMappedPolygons.eachLayer(eachFeatureFunction);
       })
     });
+
 
 
 //LOADING THE SCHOOL DATA
