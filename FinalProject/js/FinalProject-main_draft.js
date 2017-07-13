@@ -16,6 +16,16 @@ var map = L.map('map', {
   zoom: 6.5
 });
 
+//LOAD SATELLITE MAP
+// mapboxgl.accessToken = 'pk.eyJ1Ijoid2VuaGFvYnJpYW4iLCJhIjoiY2owaXNrNzhnMDB4ZjJxdGoxdHdkd2VibiJ9.Cn_2Ypo7UctdNZHt6OlDHA';
+// var map = new mapboxgl.Map({
+//     container: 'map0', // container id
+//     style: 'mapbox://styles/mapbox/satellite-v9', //stylesheet location
+//     center: [-88.509107, 15.162820], // starting position
+//     zoom: 5.5 // starting zoom
+// });
+
+
 var layerMappedMarkers;
 var slideNumber = 0;
 var parsedData;
@@ -30,6 +40,7 @@ var parsedData4;
 // console.log("1st");
 
 var filterFunction;
+
 
 
 

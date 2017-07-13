@@ -60,7 +60,7 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 
 .legend {
         position:absolute;
-        bottom:380px;
+        bottom:40px;
         left:420px;
         width:180px;
         height:220px;
@@ -318,15 +318,6 @@ li{
   font-family: inherit;
 }
 
-#map {
-    position: relative;
-    right: 150px;
-    left: 360px;
-    height: 100%;
-    top: 0;
-}
-
-
 
 #download1{
   margin:10px;
@@ -521,8 +512,6 @@ li{
     font-size:10px;
   }
 }
-
-
 
 /*
 #issues{
