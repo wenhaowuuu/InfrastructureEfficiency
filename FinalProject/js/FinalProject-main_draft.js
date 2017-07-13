@@ -71,31 +71,6 @@ $('#light').click(function(){
     }).addTo(map);
 });
 
-// $('#antique').click(function(){
-//   L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png', {
-//         maxZoom: 18,
-//         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-//     subdomains: 'abcd'
-//   }).addTo(map);
-// });
-//
-// $('#eco').click(function(){
-//   L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-eco/{z}/{x}/{y}.png', {
-//         maxZoom: 18,
-//         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-//     subdomains: 'abcd'
-//   }).addTo(map);
-// });
-//
-// $('#midnight').click(function(){
-//   L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png', {
-//         maxZoom: 18,
-//         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-//     subdomains: 'abcd'
-//   }).addTo(map);
-// });
-
-
 //LOAD SATELLITE MAP
 $('#satellite').click(function(){
   $('#map').hide();
@@ -154,8 +129,6 @@ var schoolicon = L.icon({
   iconAnchor:[8,8],
 })
 
-
-
 //////////////////////////////////PART 2  VARIABLE AND DATA SETUP///////////////////////
 ///LATIN AMERICA SHP
 var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
@@ -186,28 +159,28 @@ var filterFunction;
 /////////////////////////////////PART 3  DEFINE FUNCTIONS///////////////////////
 ////3.1 ZOOM FUNCTIONS//////
 ////NATIONAL CITIES////
-$(document).ready(function() {
-  $('#national').click(function(){
-            map.removeLayer(state.drawnOnMap);
-            $.ajax(northtriangle).done(function(data) {
-              var style = {color:"#E3DF27"};
-              parsedData = JSON.parse(data);
-              layerMappedMarkers = L.geoJson(parsedData,{
-                pointToLayer: function (feature, latlng) {
-                  link = 'https://en.wikipedia.org/wiki/' +feature.properties.CityName;
-                  html = "<div><p class = intro> Here is it<a href = 'https://en.wikipedia.org/wiki/'> Go search it!</a></p></div>";
-                  var popuptext = feature.properties.CityName + html + "<p class = intro> or copy the link below</p>" + '    ' + link;
-                  return L.circleMarker(latlng,style)
-                    .bindPopup(popuptext);
-                }
-              }).addTo(map);
-              map.fitBounds(layerMappedMarkers.getBounds(),{
-                padding: [10,10]
-              });
-            });
-          }
-      );
-});
+// $(document).ready(function() {
+//   $('#national').click(function(){
+//             map.removeLayer(state.drawnOnMap);
+//             $.ajax(northtriangle).done(function(data) {
+//               var style = {color:"#E3DF27"};
+//               parsedData = JSON.parse(data);
+//               layerMappedMarkers = L.geoJson(parsedData,{
+//                 pointToLayer: function (feature, latlng) {
+//                   link = 'https://en.wikipedia.org/wiki/' +feature.properties.CityName;
+//                   html = "<div><p class = intro> Here is it<a href = 'https://en.wikipedia.org/wiki/'> Go search it!</a></p></div>";
+//                   var popuptext = feature.properties.CityName + html + "<p class = intro> or copy the link below</p>" + '    ' + link;
+//                   return L.circleMarker(latlng,style)
+//                     .bindPopup(popuptext);
+//                 }
+//               }).addTo(map);
+//               map.fitBounds(layerMappedMarkers.getBounds(),{
+//                 padding: [10,10]
+//               });
+//             });
+//           }
+//       );
+// });
 
 //////ZOOM INTO BEIJING REAL ESTATE DATA//////
 // ////BEIJING REAL ESTATE DATA////
@@ -236,8 +209,48 @@ $('#AOI').click(function(){
       $('#30PCT').text(layer.feature.properties.gen_pov);
       $('#60PCT').text(layer.feature.properties.id);
       $('#90PCT').text(layer.feature.properties.year);
-    })
-  };
+      //LINK DATA WITH THE GRAPH
+      if(myChart){
+        map.removeLayer(myChart);
+      }
+      else{
+        var ctx2 = document.getElementById("myChart2").getContext('2d');
+        var myChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: [layer.feature.properties.m_name, "Average Poverty"],
+                datasets: [{
+                    label: 'Poverty',
+                    data: [layer.feature.properties.gen_pov, 50],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.4)',
+                        'rgba(54, 162, 235, 0.4)',
+
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        // 'rgba(255, 206, 86, 1)',
+                        // 'rgba(75, 192, 192, 1)',
+                        // 'rgba(153, 102, 255, 1)',
+                        // 'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                            }
+                          }]
+                        }
+                      }
+            });
+          }
+        }
+      )};
 
 //EXECUTION OF THE ABOVE FUNCTION
 var myFilter = function(feature) {
@@ -262,218 +275,7 @@ var myFilter = function(feature) {
 //     }
 // });
 
-
 //RADAR CHART IMAGE
-// window.chartColors = {
-//   red: 'rgb(255, 99, 132)',
-//   orange: 'rgb(255, 159, 64)',
-//   yellow: 'rgb(255, 205, 86)',
-//   green: 'rgb(75, 192, 192)',
-//   blue: 'rgb(54, 162, 235)',
-//   purple: 'rgb(153, 102, 255)',
-//   grey: 'rgb(231,233,237)'
-// };
-//
-// window.randomScalingFactor = function() {
-//   return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-// }
-//
-// var randomScalingFactor = function() {
-//   return Math.round(Math.random() * 100);
-// };
-//
-// var now = moment();
-// var dataTime1 = moment("2016-12-18T14:58:54.026Z");
-// var dataTime2 = moment("2017-01-18T20:58:54.026Z");
-// var dataTime3 = moment("2017-02-15T08:58:54.026Z");
-// var label1 =moment.duration(dataTime1.diff(now)).humanize(true);
-// var label2 =moment.duration(dataTime2.diff(now)).humanize(true);
-// var label3 =moment.duration(dataTime3.diff(now)).humanize(true);
-//
-// var color = Chart.helpers.color;
-// var config = {
-//   type: 'radar',
-//   data: {
-//     labels: [
-//       "Happiness", "Loneliness", "Health","Managing at Home", "Finances", "Work","Relationships", "Exercise", "Volunteer", "Attitude"],
-//     datasets: [{
-//       label: label1,
-//       backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
-//       borderColor: window.chartColors.red,
-//       pointBackgroundColor: window.chartColors.red,
-//       data: [8,1,5,2,4,10,0,0,3],
-//       notes: ["I am pretty happy","I am isolated","none","none","none","none","none","none"]
-//     }, {
-//       label: label2,
-//       backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
-//       borderColor: window.chartColors.blue,
-//       pointBackgroundColor: window.chartColors.blue,
-//       data: [10,3,4,3,5,8,7],
-//       notes: ["Joined social club","none","none","none","none","Was late one day","Just broke up"]
-//     },{
-//       label: label3,
-//       backgroundColor: color(window.chartColors.purple).alpha(0.2).rgbString(),
-//       borderColor: window.chartColors.purple,
-//       pointBackgroundColor: window.chartColors.purple,
-//       data: [8,4,5,4,8,9,7,1,2,6],
-//       notes: ["none","none","none","none","Won at bingo","none","none","Leg week", "Fed the poor", "Positive Mental Attitude"]
-//     } ]
-//   },
-//   options: {
-//     legend: {
-//       position: 'top',
-//     },
-//     title: {
-//       display: true,
-//       text: 'Chart.js Outcome Graph'
-//     },
-//     scale: {
-//       ticks: {
-//         beginAtZero: true
-//       }
-//     },
-//     tooltips:{
-//       enabled:false,
-//       callbacks:{
-//         label: function(tooltipItem, data){
-//           var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-//           //This will be the tooltip.body
-//           return datasetLabel + ': ' + tooltipItem.yLabel +': '+ data.datasets[tooltipItem.datasetIndex].notes[tooltipItem.index];
-//         }
-//       },
-//       custom: function(tooltip){
-//         // Tooltip Element
-//       var tooltipEl = document.getElementById('chartjs-tooltip');
-//       if (!tooltipEl) {
-//         tooltipEl = document.createElement('div');
-//         tooltipEl.id = 'chartjs-tooltip';
-//         tooltipEl.innerHTML = "<table></table>"
-//         document.body.appendChild(tooltipEl);
-//       }
-//       // Hide if no tooltip
-//       if (tooltip.opacity === 0) {
-//         tooltipEl.style.opacity = 0;
-//         return;
-//       }
-//       // Set caret Position
-//       tooltipEl.classList.remove('above', 'below', 'no-transform');
-//       if (tooltip.yAlign) {
-//         tooltipEl.classList.add(tooltip.yAlign);
-//       } else {
-//         tooltipEl.classList.add('no-transform');
-//       }
-//       function getBody(bodyItem) {
-//         return bodyItem.lines;
-//       }
-//       // Set Text
-//       if (tooltip.body) {
-//         var titleLines = tooltip.title || [];
-//         var bodyLines = tooltip.body.map(getBody);
-//         var innerHtml = '<thead>';
-//         titleLines.forEach(function(title) {
-//           innerHtml += '<tr><th>' + title + '</th></tr>';
-//         });
-//         innerHtml += '</thead><tbody>';
-//         bodyLines.forEach(function(body, i) {
-//           var colors = tooltip.labelColors[i];
-//           var style = 'background:' + colors.backgroundColor;
-//           style += '; border-color:' + colors.borderColor;
-//           style += '; border-width: 2px';
-//           var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-//           innerHtml += '<tr><td>' + span + body + '</td></tr>';
-//         });
-//         innerHtml += '</tbody>';
-//         var tableRoot = tooltipEl.querySelector('table');
-//         tableRoot.innerHTML = innerHtml;
-//       }
-//       var position = this._chart.canvas.getBoundingClientRect();
-//       // Display, position, and set styles for font
-//       tooltipEl.style.opacity = 1;
-//       tooltipEl.style.left = position.left + tooltip.caretX + 'px';
-//       tooltipEl.style.top = position.top + tooltip.caretY + 'px';
-//       tooltipEl.style.fontFamily = tooltip._fontFamily;
-//       tooltipEl.style.fontSize = tooltip.fontSize;
-//       tooltipEl.style.fontStyle = tooltip._fontStyle;
-//       tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
-//       }
-//     }
-//   }
-// };
-// window.onload = function() {
-//   window.myRadar = new Chart(document.getElementById("myChart0"), config);
-// };
-// var colorNames = Object.keys(window.chartColors);
-
-//STACKED BAR CHART
-// var numberWithCommas = function(x) {
-//   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-// };
-//
-// var dataPack1 = [21000, 22000, 26000, 35000, 55000, 55000, 56000, 59000, 60000, 61000, 60100, 62000];
-// var dataPack2 = [1000, 1200, 1300, 1400, 1060, 2030, 2070, 4000, 4100, 4020, 4030, 4050];
-// var dates = ["May 1", "May 2", "May 3", "May 4", "May 5", "May 6",
-//          "May 7", "May 8", "May 9", "May 10", "May 11", "May 12"];
-//
-// // Chart.defaults.global.elements.rectangle.backgroundColor = '#FF0000';
-//
-// var bar_ctx = document.getElementById('myChart0');
-// var bar_chart = new Chart(bar_ctx, {
-//   type: 'bar',
-//   data: {
-//       labels: dates,
-//       datasets: [
-//       {
-//           label: '',
-//           data: dataPack1,
-//           backgroundColor: "rgba(55, 160, 225, 0.7)",
-//           hoverBackgroundColor: "rgba(55, 160, 225, 0.7)",
-//           hoverBorderWidth: 2,
-//           hoverBorderColor: 'lightgrey'
-//       },
-//       {
-//           label: 'Mario',
-//           data: dataPack2,
-//           backgroundColor: "rgba(225, 58, 55, 0.7)",
-//           hoverBackgroundColor: "rgba(225, 58, 55, 0.7)",
-//           hoverBorderWidth: 2,
-//           hoverBorderColor: 'lightgrey'
-//       },
-//       ]
-//   },
-//   options: {
-//       animation: {
-//         duration: 10,
-//       },
-//       tooltips: {
-//         mode: 'label',
-//         callbacks: {
-//         label: function(tooltipItem, data) {
-//           return data.datasets[tooltipItem.datasetIndex].label + ": " + numberWithCommas(tooltipItem.yLabel);
-//         }
-//         }
-//        },
-//       scales: {
-//         xAxes: [{
-//           stacked: true,
-//           gridLines: { display: false },
-//           }],
-//         yAxes: [{
-//           stacked: true,
-//           ticks: {
-//             callback: function(value) { return numberWithCommas(value); },
-//           },
-//           }],
-//       }, // scales
-//       legend: {display: true}
-//   } // options
-//  }
-// );
-
-
-
-
-
-
 var ctx1 = document.getElementById("myChart1").getContext('2d');
 var myChart = new Chart(ctx1, {
     type: 'bar',
@@ -513,44 +315,44 @@ var myChart = new Chart(ctx1, {
 });
 
 //LOAD CHARTS 2
-var ctx2 = document.getElementById("myChart2").getContext('2d');
-var myChart = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: 'Population',
-            data: [5, 2, 8, 15, 10, 4],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.4)',
-                'rgba(54, 162, 235, 0.4)',
-                'rgba(255, 206, 86, 0.4)',
-                'rgba(75, 192, 192, 0.4)',
-                'rgba(153, 102, 255, 0.4)',
-                'rgba(255, 159, 64, 0.4)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-
+// var ctx2 = document.getElementById("myChart2").getContext('2d');
+// var myChart = new Chart(ctx2, {
+//     type: 'bar',
+//     data: {
+//         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+//         datasets: [{
+//             label: 'Population',
+//             data: [5, 2, 8, 15, 10, 4],
+//             backgroundColor: [
+//                 'rgba(255, 99, 132, 0.4)',
+//                 'rgba(54, 162, 235, 0.4)',
+//                 'rgba(255, 206, 86, 0.4)',
+//                 'rgba(75, 192, 192, 0.4)',
+//                 'rgba(153, 102, 255, 0.4)',
+//                 'rgba(255, 159, 64, 0.4)'
+//             ],
+//             borderColor: [
+//                 'rgba(255,99,132,1)',
+//                 'rgba(54, 162, 235, 1)',
+//                 'rgba(255, 206, 86, 1)',
+//                 'rgba(75, 192, 192, 1)',
+//                 'rgba(153, 102, 255, 1)',
+//                 'rgba(255, 159, 64, 1)'
+//             ],
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero:true
+//                 }
+//             }]
+//         }
+//     }
+// });
+//
 
 
 /////////////////////////////////PART 5  EXECUTION PARTS////////////////////////
