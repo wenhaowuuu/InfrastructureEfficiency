@@ -1,3 +1,5 @@
+//CLAIM THE GLOBAL VARIABLES
+
 //////////////////////////////////////PART 1  MAP SET UP////////////////////////////////////////////////////
 //1.1 SET UP BASEMAPS
 var map = L.map('map', {
@@ -5,9 +7,7 @@ var map = L.map('map', {
   zoom: 6.5
 });
 
-var Style = 'dark';
-
-L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.png', {
+L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', {
   maxZoom: 18,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
   subdomains: 'abcd'
@@ -15,99 +15,58 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
 
 ///1.2 SET UP DIFFERENT BASE MAPS
 ///switch basemaps///
-// // NEED TO WORK ON HERE!!!
-//   var layer = L.esri.basemapLayer('Topographic').addTo(map);
-//   var layerLabels;
-//
-//   function setBasemap(basemap) {
-//     if (layer) {
-//       map.removeLayer(layer);
-//     }
-//
-//     layer = L.esri.basemapLayer(basemap);
-//
-//     map.addLayer(layer);
-//
-//     if (layerLabels) {
-//       map.removeLayer(layerLabels);
-//     }
-//
-//     if (basemap === 'dark'
-//      || basemap === 'light'
-//    ) {
-//      L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ basemap + '_all/{z}/{x}/{y}@2x.png', {
-//        maxZoom: 18,
-//        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-//        subdomains: 'abcd'
-//      }).addTo(map);
-//     }
-//   }
-//
-//   function changeBasemap(basemaps){
-//     var basemap = basemaps.value;
-//     setBasemap(basemap);
-//   }
-
-
 $('#dark').click(function(){
-  $('#map0').hide();
-  $('#map').show();
-  Style = 'dark';
-  L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.png', {
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', {
     maxZoom: 18,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
     subdomains: 'abcd'
   }).addTo(map);
 });
-//
+
 $('#light').click(function(){
-    $('#map0').hide();
-    $('#map').show();
-    Style = 'light';
-    L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.png', {
-      maxZoom: 18,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-      subdomains: 'abcd'
-    }).addTo(map);
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
+    subdomains: 'abcd'
+  }).addTo(map);
 });
 
-// $('#antique').click(function(){
-//   L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png', {
-//         maxZoom: 18,
-//         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-//     subdomains: 'abcd'
-//   }).addTo(map);
-// });
-//
-// $('#eco').click(function(){
-//   L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-eco/{z}/{x}/{y}.png', {
-//         maxZoom: 18,
-//         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-//     subdomains: 'abcd'
-//   }).addTo(map);
-// });
-//
-// $('#midnight').click(function(){
-//   L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png', {
-//         maxZoom: 18,
-//         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-//     subdomains: 'abcd'
-//   }).addTo(map);
-// });
+
+$('#antique').click(function(){
+  L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
+    subdomains: 'abcd'
+  }).addTo(map);
+});
+
+$('#eco').click(function(){
+  L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-eco/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
+    subdomains: 'abcd'
+  }).addTo(map);
+});
+
+$('#midnight').click(function(){
+  L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
+    subdomains: 'abcd'
+  }).addTo(map);
+});
 
 
 //LOAD SATELLITE MAP
-$('#satellite').click(function(){
-  $('#map').hide();
-  $('#map0').show();
-  mapboxgl.accessToken = 'pk.eyJ1Ijoid2VuaGFvYnJpYW4iLCJhIjoiY2owaXNrNzhnMDB4ZjJxdGoxdHdkd2VibiJ9.Cn_2Ypo7UctdNZHt6OlDHA';
-  var map0 = new mapboxgl.Map({
-      container: 'map0', // container id
-      style: 'mapbox://styles/mapbox/satellite-v9', //stylesheet location
-      center: [-88.509107, 15.162820], // starting position
-      zoom: 6 // starting zoom
-  });
-});
+// mapboxgl.accessToken = 'pk.eyJ1Ijoid2VuaGFvYnJpYW4iLCJhIjoiY2owaXNrNzhnMDB4ZjJxdGoxdHdkd2VibiJ9.Cn_2Ypo7UctdNZHt6OlDHA';
+// var map = new mapboxgl.Map({
+//     container: 'map0', // container id
+//     style: 'mapbox://styles/mapbox/satellite-v9', //stylesheet location
+//     center: [-88.509107, 15.162820], // starting position
+//     zoom: 5.5 // starting zoom
+// });
+
+
 
 //TESTING ON LOADING ON THE SATELLITE IMAGE
 // $(document).ready(function(){
@@ -243,7 +202,155 @@ $(document).ready(function() {
 // });
 
 
-//3.3 UPDATING PAGESIDE TEXT function//////////////////////////////////////////PART  USER INPUT////////////////////////////////
+
+//UPDATING PAGESIDE TEXT function//////////////////////////////////////////PART  USER INPUT////////////////////////////////
+///2.1 DEFINE ADD PAGE FUNCTION
+// var state = {
+//   slideNumber: 0,
+//   slideData:[
+//     {
+//       "name": "Country",
+//       "content": "Here presented are some quick statistics about infrastructure efficiency in the country you selected.",
+//     },
+//     {
+//       "name": "Cities with the Highest GDP",
+//       "content": "These are the cities with the highest GDP. Move your mouse over the markers to see.",
+//       "filter": {
+//         "key": "GDP",
+//         "comparison": "greaterThan",
+//         "value": 12000,
+//       }
+//     },
+//     {
+//       "name": "The Most Populated Cities",
+//       "content": "These are the megacities with over 9,000,000 residents.",
+//       "filter": {
+//         "key": "Population",
+//         "comparison": "greaterThan",
+//         "value": 900,
+//       }
+//     },
+//     {
+//       "name": "Cities with the Highest Per Capita Income",
+//       "content": "These are the richest cities.",
+//       "filter": {
+//         "key": "PersonalAnnualIncome",
+//         "comparison": "greaterThan",
+//         "value": 60000,
+//       },
+//     },
+//   ],
+//   drawnOnMap: undefined,
+//   dataSource: undefined
+// };
+//
+// /* -----------------
+// Load data
+// ----------------- */
+// $.ajax(dataset).done(function(data){
+//   state.dataSource = JSON.parse(data);
+//   // Add the first slide
+//   addSlide(state.slideData[0]);
+// });
+//
+// /* -----------------
+// Application functions
+// ----------------- */
+// // Increase state counter by one
+// var next = function() {
+//   state.slideNumber++;
+// };
+//
+// // Increase decrease state counter by one
+// var previous = function() {
+//   state.slideNumber--;
+// };
+//
+// // Check to see if markers have been added to the map.
+// // If they have, remove them. Checking first prevents an error.
+// var removeDrawnOnMap = function() {
+//   if (typeof state.drawnOnMap !== 'undefined') {
+//     map.removeLayer(state.drawnOnMap);
+//     state.drawnOnMap = undefined;
+//   }
+// };
+//
+//
+//
+//
+// // //////FROM JEFF'S DEMO///////
+// // Return a style object.
+// // The object should contain a color based on the feature material type.
+// var generateStyleObject = function(feature) {
+//   if (feature.properties.PersonalAnnualIncomeLevel == "high") {
+//     return { color: "#00DEA6" };
+//   } else if (feature.properties.PersonalAnnualIncomeLevel == "medium") {
+//     return { color: "#FFA58A" };
+//   } else if (feature.properties.PersonalAnnualIncomeLevel == "low") {
+//     return { color: "#FF3D5E" };
+//   } else {
+//     return { color: "#B591F5" };
+//   }
+// };
+//
+// var drawOnMap = function(data, filter) {
+//   // If this particular slide includes the filter property,
+//   // then apply the following filter. If not, ignore this code.
+//   // This means I can choose whether a slide uses a filter based
+//   // on whether or not I include a filter on the slide. Note that
+//   // the first and last slides do not contain a filter.
+//   if (typeof filter !== 'undefined') {
+//     filterFunction = function(feature) {
+//       if (filter.comparison === "lessThan") {
+//         return feature.properties[filter.key] < filter.value;
+//       } else if (filter.comparison === "equals") {
+//         return feature.properties[filter.key] === filter.value;
+//       } else if (filter.comparison === "greaterThan") {
+//         return feature.properties[filter.key] > filter.value;
+//       }
+//     };
+//   }
+//   // Create a leaflet layer and add it to the map. Store this layer
+//   // as state.drawnOnMap. I will refer to this later when I want
+//   // to remove this layer from the map and when I want to use getBounds
+//   // to get the bounds of this layer.
+//
+// state.drawnOnMap = L.geoJson(state.dataSource, {
+//     filter: filterFunction,
+//     pointToLayer: function (feature, latlng) {
+//       var style = generateStyleObject(feature);
+//       var popupText = "In 2009, " +feature.properties.CityName + " has a GDP of RMB " +feature.properties.GDP + "00 million. It has a population of " + feature.properties.Population + "0000. " + feature.properties['investment proportion'] +" of its economy is driven by investment.";
+//       return new L.Marker(latlng, {
+//         icon: myIcon2
+//       })
+//       .bindPopup(popupText);
+//     }
+//   }).addTo(map);
+// };
+//
+// var addSlide = function(slide) {
+//   drawOnMap(state.dataSource, slide.filter);
+//   $("#sidebar-heading").text(slide.name);
+//   $("#sidebar-text").text(slide.content);
+// };
+//
+//
+// //CLICK EVENTS FUNCTION
+// $('#next').click(function() {
+//   next();
+//   removeDrawnOnMap();
+//   // Note the use of state.slideData[state.slideNumber].
+//   // This returns the slide for my current state.
+//   addSlide(state.slideData[state.slideNumber]);
+// });
+//
+// $('#previous').click(function() {
+//   previous();
+//   removeDrawnOnMap();
+//   // Note the use of state.slideData[state.slideNumber].
+//   // This returns the slide for my current state.
+//   addSlide(state.slideData[state.slideNumber]);
+// });
 
 
 /////////////////////////////////PART 4  DEFINE ANNOTATION ELEMENTS///////////////////////
@@ -283,6 +390,20 @@ var myFilter = function(feature) {
     return true;
   }
 };
+
+// $(document).ready(function() {
+//   $.ajax(dataset).done(function(data) {
+//     var parsedData = JSON.parse(data);
+//     var featureGroup = L.geoJson(parsedData, {
+//       style: myStyle,
+//       filter: myFilter
+//     }).addTo(map).bindPopup("THIS AREA");
+//
+//     // quite similar to _.each
+//     console.log(parsedData);
+//     featureGroup.eachLayer(eachFeatureFunction);
+//   });
+// });
 
 
 //LOAD CHARTS
