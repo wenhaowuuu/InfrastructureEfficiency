@@ -85,6 +85,14 @@ $('#satellite').click(function(){
 
 
 //LOAD THE MUNICIPALITIES ONTO THE SATELLITE MAP
+// THIS MAPBOX IS JUST AN EXTENSION OF LEAFLET LIBRARY!!!NOT THE MAPBOX WE USED!!!
+// var myLayer = L.mapbox.featureLayer()
+//   .loadURL("https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson")
+//   .addTo(map0);
+//
+
+
+///MY TRIAL
 var editorData = $.ajax(
   {
     url:"https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson"
@@ -95,6 +103,7 @@ var editorData = $.ajax(
 
           //REFERENCE ON LOADING ELEMENTS ON MAPBOX'S MAP
           // https://gist.github.com/danswick/339d00429ed5a201e0d7ef4fac648fa5
+          // http://lyzidiamond.com/posts/external-geojson-mapbox
           // http://lyzidiamond.com/posts/external-geojson-mapbox
 
           //TESTING
@@ -147,6 +156,12 @@ var editorData = $.ajax(
         });
     });
 });
+
+
+
+//////////////////////////////////0714//////////////////////////////////////////////
+
+
 
   //
   //
@@ -314,7 +329,7 @@ $('#AOI').click(function(){
  var eachFeatureFunction = function(layer) {
     layer.on('click', function (event) {
       map.fitBounds(layer.getBounds(),{
-                 padding: [350,350]
+                 padding: [360,360]
                });
       order = order + 1;
       console.log(order);
@@ -474,12 +489,12 @@ var myChart1 = new Chart(ctx1, {
 
 /////////////////////////////////PART 5  EXECUTION PARTS////////////////////////
 ///5.0 ADDING SOME MARKERS
-L.marker([4.674290, -74.103698]).addTo(map).bindPopup("Bogota, Colombia");
-L.marker([10.395132, -75.485867]).addTo(map).bindPopup("Cartagena, Colombia");
-L.marker([8.997980, -79.527990]).addTo(map).bindPopup("Panama City, Panama");
-L.marker([-0.183847, -78.490285]).addTo(map).bindPopup("Quito, Ecuador");
-L.marker([9.931887, -84.085539]).addTo(map).bindPopup("San Jose, Costa Rica");
-L.marker([14.629373, -90.513847]).addTo(map).bindPopup("Guatemala City, Guatemala");
+// L.marker([4.674290, -74.103698]).addTo(map).bindPopup("Bogota, Colombia");
+// L.marker([10.395132, -75.485867]).addTo(map).bindPopup("Cartagena, Colombia");
+// L.marker([8.997980, -79.527990]).addTo(map).bindPopup("Panama City, Panama");
+// L.marker([-0.183847, -78.490285]).addTo(map).bindPopup("Quito, Ecuador");
+// L.marker([9.931887, -84.085539]).addTo(map).bindPopup("San Jose, Costa Rica");
+// L.marker([14.629373, -90.513847]).addTo(map).bindPopup("Guatemala City, Guatemala");
 
 
 //5.1 SOUTH AMERICA COUNTRY LEVEL DATA
