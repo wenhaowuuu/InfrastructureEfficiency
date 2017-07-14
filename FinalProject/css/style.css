@@ -147,12 +147,26 @@ div.intro p {
   z-index:50;
 }
 
+.hint{
+  position:absolute;
+  top:90px;
+  right:30px;
+  font-family: inherit;
+  font-style: italic;
+  font-size:13px;
+  color:#ffffff;
+  word-break: auto;
+  z-index:80;
+}
+
+
 .storylink{
   position:relative;
   top:30px;
-  font-family:Simplifica;
+  font-family:inherit;
+  font-weight: bold;
   font-size:14px;
-  color:grey;
+  color:#f07f30;
 }
 
 .annotation {

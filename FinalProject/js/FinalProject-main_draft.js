@@ -85,103 +85,115 @@ $('#satellite').click(function(){
 
 
 //LOAD THE MUNICIPALITIES ONTO THE SATELLITE MAP
+var editorData = $.ajax(
+  {
+    url:"https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson"
+  }
+).done(function(data){
+        // console.log("downloadxxx");
+        map0.on('load', function () {
+
+          // http://lyzidiamond.com/posts/external-geojson-mapbox
+
+          //TESTING
+          map0.addLayer({
+                      'id': 'boundarys',
+                      'type': 'fill',
+                      'source': {
+                      'type': 'geojson',
+                            'data': {
+                                      'type': 'Feature',
+                                      'geometry': {
+                                      'type': 'Polygon',
+                                      'coordinates': [[
+                                                [-90.583466, 10.571087],
+                                                [-90.583466, -10.333333],
+                                                [-70.589323, -10.333333],
+                                                [-70.589323, 10.571087]
+                                              ]]
+                                              }
+                                      }
+                              },
+                        'layout': {},
+                              'paint': {
+                                  'fill-color': '#0000ff',
+                                  'fill-opacity': 0.5
+                               }
+                        });
+
+
+          //add source
+            map0.addSource(
+              "myData",{
+                type:"geojson",
+                data:data
+              }
+            );
+
+         //LOAD MUNICIPALITIES///////
+          map0.addLayer({
+                'id': 'shapes',
+                'type': 'fill',
+                'source': "myData",
+                'layout': {},
+                'paint': {
+                    'fill-color': '#00ffff',
+                    'fill-opacity': 0.8
+                }
+              });
+
+        });
+    });
+});
+
+  //
+  //
   // $(document).ready(function(){
   //   $.ajax(municipality1).done(function(data) {
   //     parsedData13 = JSON.parse(data);
   //     console.log(parsedData13);
+  //     console.log(parsedData13.features[0].geometry.coordinates[0][0][0][0],
+  //                 parsedData13.features[0].geometry.coordinates[0][0][0][1]);
   //
-  //     layerMappedPolygons = L.geoJson(parsedData13,
-  //       {
-  //         style: myStyle,
-  //         pointToLayer: function (feature, latlng) {
-  //           return new L.Polygon(latlng, {
-  //           });
-  //         },
-  //
-  //         onEachFeature: function(feature,layer){
-  //             layer.bindPopup(
-  //               "<b>Municipality Name: </b>" +
-  //               feature.properties.m_name +
-  //               "</br>" +
-  //               "<b>Poverty Rate: </b>" +
-  //               feature.properties.gen_pov +
-  //               "</br>" +
-  //               "<b>Department Name: </b>" +
-  //               feature.properties.d_name +
-  //               "</br>" +
-  //               "<b>Data Collected Year: </b>" +
-  //               feature.properties.year
-  //             )
-  //           }
-  //         }).addTo(map0);
-  //
-  //
-  //
-  //     _.each(parsedData13,function(feature){
-  //       map0.addLayer({
-  //             'id': 'boundary1',
-  //             'type': 'fill',
-  //             'source': {
-  //                 'type': 'geojson',
-  //                 'data': {
-  //                           'type': 'Feature',
-  //                           'geometry': {
-  //                               'type': 'Polygon',
-  //                               'coordinates': [feature.latlng
-  //
-  //                                 [
-  //                               [-69.583466, 3.571087],
-  //                               [-69.583466, -10.333333],
-  //                               [-60.589323, -10.333333],
-  //                               [-60.589323, 3.571087]
-  //                             ]]
-  //                             }
-  //                          }
-  //             },
-  //             'layout': {},
-  //             'paint': {
-  //                 'fill-color': '#0000ff',
-  //                 'fill-opacity': 0.8
-  //             }
-  //           });
-  //
-  //
-  //     });
-  //
-  //
-  //         layerMappedPolygons.eachLayer(eachFeatureFunction);
-  //       })
-  //     });
-  //
+  //     console.log(parsedData13.features[1].geometry.coordinates[0][0][0][0],
+  //                 parsedData13.features[1].geometry.coordinates[0][0][0][1]);
 
+      // console.log(parsedData13.features[2].geometry.coordinates[0][0][0][0],
+      //             parsedData13.features[2].geometry.coordinates[0][0][0][1]);
+      //
+      // console.log(parsedData13.features[3].geometry.coordinates[0][0][0][0],
+      //             parsedData13.features[3].geometry.coordinates[0][0][0][1]);
 
+///////////////////////////////////////////////////////////////
+      //
+      // _.each(parsedData13,function(feature){
+      //
+      //       // onEachFeature: function(feature,layer){
+      //       //     layer.bindPopup(
+      //       //       "<b>Municipality Name: </b>" +
+      //       //       feature.properties.m_name +
+      //       //       "</br>" +
+      //       //       "<b>Poverty Rate: </b>" +
+      //       //       feature.properties.gen_pov +
+      //       //       "</br>" +
+      //       //       "<b>Department Name: </b>" +
+      //       //       feature.properties.d_name +
+      //       //       "</br>" +
+      //       //       "<b>Data Collected Year: </b>" +
+      //       //       feature.properties.year
+      //       //     )
+      //       //   }
+      //      layerMappedPolygons.eachLayer(eachFeatureFunction);
+      //    }
+      //  );
 
-
-        map0.addLayer({
-              'id': 'boundary',
-              'type': 'fill',
-              'source': {
-                  'type': 'geojson',
-                  'data': {
-                            'type': 'Feature',
-                            'geometry': {
-                                'type': 'Polygon',
-                                'coordinates': [[
-                                [-69.583466, 3.571087],
-                                [-69.583466, -10.333333],
-                                [-60.589323, -10.333333],
-                                [-60.589323, 3.571087]
-                              ]]
-                              }
-                           }
-              },
-              'layout': {},
-              'paint': {
-                  'fill-color': '#0000ff',
-                  'fill-opacity': 0.8
-              }
-            });
-    });
+////////////////////////////////////////////////////////////////
+///HERE IS LOADING GEOJSON DATA ONTOP MAPBOX/////
+/////https://gist.github.com/danswick/339d00429ed5a201e0d7ef4fac648fa5//
+//         })
+//       });
+//
+// });
 
 
 //TESTING ON LOADING ON THE SATELLITE IMAGE
@@ -268,16 +280,26 @@ var filterFunction;
 
 //////ZOOM INTO BEIJING REAL ESTATE DATA//////
 // ////BEIJING REAL ESTATE DATA////
+// var map0 = new mapboxgl.Map({
+//     container: 'map0', // container id
+//     style: 'mapbox://styles/mapbox/satellite-v9', //stylesheet location
+//     center: [-88.509107, 15.162820], // starting position
+//     zoom: 6 // starting zoom
+// });
+
 $('#Global').click(function(){
   map.setView([15.162820, -87.509107],2);
+  // map0.setCenter([15.162820, -87.509107],2);
 });
 
 $('#Regional').click(function(){
   map.setView([15.162820, -87.509107],5);
+  // map0.setCenter([15.162820, -87.509107],5);
 });
 
 $('#AOI').click(function(){
   map.setView([15.162820, -87.509107],6.5);
+  // map0.setCenter([15.162820, -87.509107],6.5);
 });
 
 /////////////////////////////////PART 4  DEFINE ANNOTATION ELEMENTS///////////////////////
@@ -285,6 +307,10 @@ $('#AOI').click(function(){
 //WHEN THE FEATURE IS CLICKED: //
  var eachFeatureFunction = function(layer) {
     layer.on('click', function (event) {
+      map.fitBounds(layer.getBounds(),{
+                 padding: [350,350]
+               });
+
     //PUSH INTO THE LAYER SELECTION GROUP
     layerselected.push(layer);
     console.log(layerselected);
@@ -445,6 +471,7 @@ $(document).ready(function(){
     layerMappedPolygons = _.each(parsedData10,function(item){
       L.geoJson(parsedData10,
         {
+          style: {opacity:0.4},
           pointToLayer: function (feature, latlngs) {
             return new L.Polygon(latlngs, {
             }
