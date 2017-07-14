@@ -259,6 +259,10 @@ var layerMappedPolygons;
 
 var layerselected = [];
 var namelist = [];
+var namelistvalue = [];
+var order = 0;
+var list = ' ';
+var blank = '  ';
 
 var slideNumber = 0;
 var parsedData;
@@ -310,14 +314,29 @@ $('#AOI').click(function(){
       map.fitBounds(layer.getBounds(),{
                  padding: [350,350]
                });
+      order = order + 1;
+      console.log(order);
 
     //PUSH INTO THE LAYER SELECTION GROUP
     layerselected.push(layer);
     console.log(layerselected);
-
     namelist.push(layer.feature.properties.m_name);
     console.log(namelist);
-    $('#selection').text(namelist);
+
+    _.each(namelist,function(name){
+      list = order + '.' + name;
+    })
+
+    $('#selection').append(blank + blank + blank + list + " ");
+
+    //APPENDING METHOD
+    // $('#selection').html(
+    //   "\
+    //   <p>" + blank + blank + list + "</p>"
+    //   );
+
+
+    // $('#selection').text(namelist);
 
     // <div id="results" style="display: none;">
     document.getElementById("results").style.display = "inline";

@@ -337,8 +337,10 @@ canvas {
 
 #selection{
   position:relative;
+  top:15px;
   width:340px;
   word-wrap: break-word;
+  font-style: italic;
   -moz-hyphens:auto;
   -ms-hyphens:auto;
   -webkit-hyphens:auto;
@@ -346,7 +348,7 @@ canvas {
 }
 #results{
   position:relative;
-  top:5px;
+  top:10px;
   width:390px;
 }
 li{
