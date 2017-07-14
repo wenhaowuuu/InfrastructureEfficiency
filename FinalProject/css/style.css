@@ -321,6 +321,15 @@ canvas {
   font-size: 24px;
 }
 
+#selection{
+  position:relative;
+  width:340px;
+  word-wrap: break-word;
+  -moz-hyphens:auto;
+  -ms-hyphens:auto;
+  -webkit-hyphens:auto;
+  hyphens:auto;
+}
 #results{
   position:relative;
   top:5px;

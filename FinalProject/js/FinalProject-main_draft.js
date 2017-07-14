@@ -141,6 +141,11 @@ var municipality1 = "https://raw.githubusercontent.com/wenhaowuuu/Infrastructure
 var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
 
 var layerMappedMarkers;
+var layerMappedPolygons;
+
+var layerselected = [];
+var namelist = [];
+
 var slideNumber = 0;
 var parsedData;
 var parsedData2;
@@ -148,38 +153,15 @@ var parsedData3;
 var parsedData4;
 var filterFunction;
 
+
 //FOR CHINA PROVINCES DATA
 // var dataset0 = "https://raw.githubusercontent.com/wenhaowuuu/MidTermFinal/master/data/EconomicIndicator_Chinesecities.geojson";
 // var dataset = "https://raw.githubusercontent.com/wenhaowuuu/MidTermFinal/master/data/EconomicIndicator_Chinesecities.geojson";
 // var dataset2 = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/geojson/housingprice_Beijing.geojson";
 // var dataset3 = "https://raw.githubusercontent.com/wenhaowuuu/FinalProject/master/data/china_provincies_def.geojson";
 
-// console.log("1st");
-
 /////////////////////////////////PART 3  DEFINE FUNCTIONS///////////////////////
 ////3.1 ZOOM FUNCTIONS//////
-////NATIONAL CITIES////
-// $(document).ready(function() {
-//   $('#national').click(function(){
-//             map.removeLayer(state.drawnOnMap);
-//             $.ajax(northtriangle).done(function(data) {
-//               var style = {color:"#E3DF27"};
-//               parsedData = JSON.parse(data);
-//               layerMappedMarkers = L.geoJson(parsedData,{
-//                 pointToLayer: function (feature, latlng) {
-//                   link = 'https://en.wikipedia.org/wiki/' +feature.properties.CityName;
-//                   html = "<div><p class = intro> Here is it<a href = 'https://en.wikipedia.org/wiki/'> Go search it!</a></p></div>";
-//                   var popuptext = feature.properties.CityName + html + "<p class = intro> or copy the link below</p>" + '    ' + link;
-//                   return L.circleMarker(latlng,style)
-//                     .bindPopup(popuptext);
-//                 }
-//               }).addTo(map);
-//               map.fitBounds(layerMappedMarkers.getBounds(),{
-//                 padding: [10,10]
-//               });
-//             });
-//           }
-//       );
 // });
 
 //////ZOOM INTO BEIJING REAL ESTATE DATA//////
@@ -201,6 +183,14 @@ $('#AOI').click(function(){
 //WHEN THE FEATURE IS CLICKED: //
  var eachFeatureFunction = function(layer) {
     layer.on('click', function (event) {
+    //PUSH INTO THE LAYER SELECTION GROUP
+    layerselected.push(layer);
+    console.log(layerselected);
+
+    namelist.push(layer.feature.properties.m_name);
+    console.log(namelist);
+    $('#selection').text(namelist);
+
     // <div id="results" style="display: none;">
     document.getElementById("results").style.display = "inline";
     console.log(layer.feature);
@@ -209,6 +199,23 @@ $('#AOI').click(function(){
       $('#30PCT').text(layer.feature.properties.gen_pov);
       $('#60PCT').text(layer.feature.properties.id);
       $('#90PCT').text(layer.feature.properties.year);
+
+      //HIGHLIGHT THE MAP CLICKED
+      var fadeout = {
+        // 'color': '#0000ff',
+        // 'weight': 2,
+        'opacity': 0.2,
+      };
+      layerMappedPolygons.setStyle(fadeout);
+
+      var highlight = {
+        'color': '#0000FF',
+        'weight': 2,
+        'opacity': 0.8,
+      };
+      layer.setStyle(highlight);
+
+
       //LINK DATA WITH THE GRAPH
       if(myChart){
         map.removeLayer(myChart);
@@ -218,22 +225,20 @@ $('#AOI').click(function(){
         var myChart = new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: [layer.feature.properties.m_name, "Average Poverty"],
+                labels: [layer.feature.properties.m_name, "Average", "UN"],
                 datasets: [{
                     label: 'Poverty',
-                    data: [layer.feature.properties.gen_pov, 50],
+                    data: [layer.feature.properties.gen_pov, 50, 30],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.4)',
                         'rgba(54, 162, 235, 0.4)',
+                        'rgba(255, 206, 86, 0.4)',
 
                     ],
                     borderColor: [
                         'rgba(255,99,132,1)',
                         'rgba(54, 162, 235, 1)',
-                        // 'rgba(255, 206, 86, 1)',
-                        // 'rgba(75, 192, 192, 1)',
-                        // 'rgba(153, 102, 255, 1)',
-                        // 'rgba(255, 159, 64, 1)'
+                        'rgba(255, 206, 86, 1)',
                     ],
                     borderWidth: 1
                 }]
@@ -252,7 +257,7 @@ $('#AOI').click(function(){
         }
       )};
 
-//EXECUTION OF THE ABOVE FUNCTION
+
 var myFilter = function(feature) {
   if (feature.properties.gen_pov===' ') {
   return false;
@@ -277,7 +282,7 @@ var myFilter = function(feature) {
 
 //RADAR CHART IMAGE
 var ctx1 = document.getElementById("myChart1").getContext('2d');
-var myChart = new Chart(ctx1, {
+var myChart1 = new Chart(ctx1, {
     type: 'bar',
     data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -315,44 +320,7 @@ var myChart = new Chart(ctx1, {
 });
 
 //LOAD CHARTS 2
-// var ctx2 = document.getElementById("myChart2").getContext('2d');
-// var myChart = new Chart(ctx2, {
-//     type: 'bar',
-//     data: {
-//         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-//         datasets: [{
-//             label: 'Population',
-//             data: [5, 2, 8, 15, 10, 4],
-//             backgroundColor: [
-//                 'rgba(255, 99, 132, 0.4)',
-//                 'rgba(54, 162, 235, 0.4)',
-//                 'rgba(255, 206, 86, 0.4)',
-//                 'rgba(75, 192, 192, 0.4)',
-//                 'rgba(153, 102, 255, 0.4)',
-//                 'rgba(255, 159, 64, 0.4)'
-//             ],
-//             borderColor: [
-//                 'rgba(255,99,132,1)',
-//                 'rgba(54, 162, 235, 1)',
-//                 'rgba(255, 206, 86, 1)',
-//                 'rgba(75, 192, 192, 1)',
-//                 'rgba(153, 102, 255, 1)',
-//                 'rgba(255, 159, 64, 1)'
-//             ],
-//             borderWidth: 1
-//         }]
-//     },
-//     options: {
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     beginAtZero:true
-//                 }
-//             }]
-//         }
-//     }
-// });
-//
+
 
 
 /////////////////////////////////PART 5  EXECUTION PARTS////////////////////////
@@ -385,7 +353,6 @@ $(document).ready(function(){
   );
   });
 });
-// bindPopup(feature.properties.country);
 
 
 //5.2 MUNICIPAL LEVEL DATA
@@ -428,12 +395,15 @@ var myStyle = function(feature){
   return {};
 };
 
+
+
+
 $(document).ready(function(){
   $.ajax(municipality1).done(function(data) {
     parsedData13 = JSON.parse(data);
     console.log(parsedData13);
     console.log("parsed13");
-    var layerMappedPolygons = L.geoJson(parsedData13,
+    layerMappedPolygons = L.geoJson(parsedData13,
       {
         style: myStyle,
         pointToLayer: function (feature, latlng) {
