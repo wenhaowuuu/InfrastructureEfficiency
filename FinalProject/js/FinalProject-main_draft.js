@@ -93,6 +93,8 @@ var editorData = $.ajax(
         // console.log("downloadxxx");
         map0.on('load', function () {
 
+          //REFERENCE ON LOADING ELEMENTS ON MAPBOX'S MAP
+          // https://gist.github.com/danswick/339d00429ed5a201e0d7ef4fac648fa5
           // http://lyzidiamond.com/posts/external-geojson-mapbox
 
           //TESTING
