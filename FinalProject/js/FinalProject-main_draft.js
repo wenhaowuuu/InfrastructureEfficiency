@@ -82,7 +82,107 @@ $('#satellite').click(function(){
       center: [-88.509107, 15.162820], // starting position
       zoom: 6 // starting zoom
   });
-});
+
+
+//LOAD THE MUNICIPALITIES ONTO THE SATELLITE MAP
+  // $(document).ready(function(){
+  //   $.ajax(municipality1).done(function(data) {
+  //     parsedData13 = JSON.parse(data);
+  //     console.log(parsedData13);
+  //
+  //     layerMappedPolygons = L.geoJson(parsedData13,
+  //       {
+  //         style: myStyle,
+  //         pointToLayer: function (feature, latlng) {
+  //           return new L.Polygon(latlng, {
+  //           });
+  //         },
+  //
+  //         onEachFeature: function(feature,layer){
+  //             layer.bindPopup(
+  //               "<b>Municipality Name: </b>" +
+  //               feature.properties.m_name +
+  //               "</br>" +
+  //               "<b>Poverty Rate: </b>" +
+  //               feature.properties.gen_pov +
+  //               "</br>" +
+  //               "<b>Department Name: </b>" +
+  //               feature.properties.d_name +
+  //               "</br>" +
+  //               "<b>Data Collected Year: </b>" +
+  //               feature.properties.year
+  //             )
+  //           }
+  //         }).addTo(map0);
+  //
+  //
+  //
+  //     _.each(parsedData13,function(feature){
+  //       map0.addLayer({
+  //             'id': 'boundary1',
+  //             'type': 'fill',
+  //             'source': {
+  //                 'type': 'geojson',
+  //                 'data': {
+  //                           'type': 'Feature',
+  //                           'geometry': {
+  //                               'type': 'Polygon',
+  //                               'coordinates': [feature.latlng
+  //
+  //                                 [
+  //                               [-69.583466, 3.571087],
+  //                               [-69.583466, -10.333333],
+  //                               [-60.589323, -10.333333],
+  //                               [-60.589323, 3.571087]
+  //                             ]]
+  //                             }
+  //                          }
+  //             },
+  //             'layout': {},
+  //             'paint': {
+  //                 'fill-color': '#0000ff',
+  //                 'fill-opacity': 0.8
+  //             }
+  //           });
+  //
+  //
+  //     });
+  //
+  //
+  //         layerMappedPolygons.eachLayer(eachFeatureFunction);
+  //       })
+  //     });
+  //
+
+
+
+
+        map0.addLayer({
+              'id': 'boundary',
+              'type': 'fill',
+              'source': {
+                  'type': 'geojson',
+                  'data': {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Polygon',
+                                'coordinates': [[
+                                [-69.583466, 3.571087],
+                                [-69.583466, -10.333333],
+                                [-60.589323, -10.333333],
+                                [-60.589323, 3.571087]
+                              ]]
+                              }
+                           }
+              },
+              'layout': {},
+              'paint': {
+                  'fill-color': '#0000ff',
+                  'fill-opacity': 0.8
+              }
+            });
+    });
+
 
 //TESTING ON LOADING ON THE SATELLITE IMAGE
 // $(document).ready(function(){
@@ -139,6 +239,8 @@ var municipality = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureE
 var highschool = "http://services2.arcgis.com/So9L2GYDzmW40U1b/ArcGIS/rest/services/High_Schools_in_Triangulo_Norte/FeatureServer/0?f=pjson";
 var municipality1 = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
 var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
+
+
 
 var layerMappedMarkers;
 var layerMappedPolygons;
