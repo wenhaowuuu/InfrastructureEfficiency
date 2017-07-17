@@ -328,6 +328,9 @@ $('#AOI').click(function(){
 //WHEN THE FEATURE IS CLICKED: //
  var eachFeatureFunction = function(layer) {
     layer.on('click', function (event) {
+      //UPDATE THE EXCEL TABLE INFO TO BE DOWNLOADED
+      $('#exceltitle').text(layer.feature.properties.m_name);
+      //ZOOM TO THE SELECTED MUNICIPALITY
       map.fitBounds(layer.getBounds(),{
                  padding: [360,360]
                });
@@ -675,6 +678,49 @@ var myFilter2 = function(feature) {
     return true;
   }
 };
+
+//EXPORT FUNCTIONS
+// function downloadFile(fileName, content){
+//     var aLink = document.createElement('a');
+//     var blob = new Blob([content]);
+//     var evt = document.createEvent("HTMLEvents");
+//     evt.initEvent("click", false, false);
+//     aLink.download = fileName;
+//     aLink.href = URL.createObjectURL(blob);
+//     aLink.dispatchEvent(evt);
+//     console.log("downloadfile run");
+// }
+//
+// $('#download1').click(function(){
+//   downloadFile("jack","hello ground!");
+//   console.log("download a");
+// })
+
+
+//EXPORT TABLES TEST 2
+var tableToExcel = (function() {
+  var uri = 'data:application/vnd.ms-excel;base64,'
+    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+    , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+  return function(table, name) {
+    if (!table.nodeType) table = document.getElementById(table)
+    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+    window.location.href = uri + base64(format(template, ctx))
+  }
+})()
+
+$('download2').click(function(){
+  tableToExcel('testTable', 'W3C Example Table');
+});
+
+
+// $('#Global').click(function(){
+//   map.setView([15.162820, -87.509107],2);
+//   // map0.setCenter([15.162820, -87.509107],2);
+// });
+
+
 
 ////ADD PROVINCE WITH GDP GROWTH RATE////
 // $(document).ready(function(){

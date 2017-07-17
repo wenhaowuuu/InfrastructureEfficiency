@@ -367,7 +367,11 @@ li{
 }
 
 #download2{
+  /*position:absolute;*/
+  /*right:30px;
+  bottom:20px;*/
   margin:10px;
+  z-index: 60;
 }
 
 #fill1{
@@ -408,6 +412,17 @@ li{
   background-color:#F33105;
   height:10px;
   width:20px;
+}
+
+#testTable{
+  position:absolute;
+  right:550px;
+  top:40px;
+  background-color:white;
+  margin:15px;
+  padding: 15px;
+  z-index:60;
+  display:none;
 }
 
 
