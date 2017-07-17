@@ -130,11 +130,14 @@
   </head>
   <body>
     <div id='map0'></div>
+    <div id="map2" style="position: absolute; right:0; left: 400px; top: 30px; height:100%; z-index:20;"></div>
     <script>
 
     </script>
 
-
+    <button class="btn btn-default dropdown-toggle" type="button" id="ARCGIS" data-toggle="dropdown" aria-haspopup="true">
+      ARCGIS-ONLINE
+    </button>
     <!--Left Panel-->
     <div id = "header">
       <p id = "header_text"><strong>GEOADAPTIVE &nbsp; </strong></p>
@@ -437,6 +440,11 @@ https://stackoverflow.com/questions/6517106/how-to-pass-html-table-values-to-exc
     <script src="js/decode.js"></script>
     <script src="js/FinalProject-main_draft.js"></script>
     <!-- <script src="js/MidTerm-Functions.js"></script> -->
+
+    <!-- //LOAD ESRI LEAFLET LIBRARY -->
+    <script src="https://unpkg.com/esri-leaflet@2.0.8"
+    integrity="sha384-ze7rgny7/YGFxBlVgTBdOABNWe5V9BYjju/qwqJhCU8XJHtuEnRlbUpN5lXyY706"
+    crossorigin=""></script>
 
 
     <!-- SET UP FOR HIGHLIGHTING CLICK FUNCTION -->

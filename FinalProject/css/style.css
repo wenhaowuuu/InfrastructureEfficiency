@@ -374,6 +374,13 @@ li{
   z-index: 60;
 }
 
+#ARCGIS{
+  position:absolute;
+  right:340px;
+  top:50px;
+  z-index: 60;
+}
+
 #fill1{
   position:relative;
   right:5px;
