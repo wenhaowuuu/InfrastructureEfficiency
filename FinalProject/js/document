@@ -1,0 +1,107 @@
+// REFERENCE FOR ARCGIS ONLINE LOADING MAPS
+// https://github.com/Esri/esri-leaflet-doc/blob/master/src/pages/api-reference/layers/tiled-map-layer.md
+// http://patrickarlt.com/esri-leaflet/api-reference/layers/tiled-map-layer.html
+// http://zevross.com/blog/2014/04/25/adding-arcgis-map-services-to-your-map-using-leaflet/
+
+
+load ESRI MAPS
+<script src="https://unpkg.com/esri-leaflet@2.0.8"
+integrity="sha384-ze7rgny7/YGFxBlVgTBdOABNWe5V9BYjju/qwqJhCU8XJHtuEnRlbUpN5lXyY706"
+crossorigin=""></script>
+
+
+<!--
+https://stackoverflow.com/questions/6517106/how-to-pass-html-table-values-to-excel-sheet-cells
+<script type="text/javaScript">
+ //导出到Excel
+ function exportToExcel() {
+  if(document.getElementById("title")) {
+   try {
+    var oRangeRef = document.body.createTextRange();
+    oRangeRef.execCommand("Copy");
+    var appExcel = new ActiveXObject("Excel.Application");
+    appExcel.visible = true;
+    appExcel.Workbooks.Add().WorkSheets.Item(1).Paste();
+   } catch(e) {
+    alert("出错啦！可能是浏览器或者是数据量太大咯哦！");
+    return;
+   }
+   appExcel = null;
+   oRangeRef = null;
+  }
+ }
+
+ //打印
+ function print() {
+  if(document.getElementById("title")) {
+   var export = document.getElementById("export");
+   var print = document.getElementById("print");
+   try {
+    export.style.display = "none";
+    print.style.display = "none";
+    document.all.WebBrowser.ExecWB(6,1);
+   } catch(e) {
+    alert("出错啦！可能是浏览器或者是数据量太大咯哦！");
+    return;
+   }
+   export.style.display = "";
+   print.style.display = "";
+  }
+ }
+</script> -->
+
+
+
+
+
+<!-- TEST0.2 -->
+    <!-- <head>
+      <script type="text/javascript">
+    function CreateExcelSheet() {
+        var x = myTable.rows;
+
+        var xls = new ActiveXObject("Excel.Application");
+            xls.visible = true;
+            xls.Workbooks.Add;
+        for (i = 0; i < x.length; i++) {
+            var y = x[i].cells;
+            for (j = 0; j < y.length; j++) {
+                xls.Cells( i+1, j+1).Value = y[j].innerText;
+            }
+        }
+    }
+    </script>
+</head>
+<body> -->
+
+<!-- <form>
+    <input type="button" onclick="CreateExcelSheet()" value="Create Excel Sheet">
+</form> -->
+
+<!-- <table id="myTable" border="2">
+    <tr>
+        <td>Name</td>
+        <td>GDP</td>
+        <td>POPULATION</td>
+    </tr>
+    <tr>
+        <td>Shivani</td>
+        <td>25</td>
+        <td>100000</td>
+    </tr>
+    <tr>
+        <td>Naren </td>
+        <td>28</td>
+        <td>90450</td>
+    </tr>
+    <tr>
+        <td>Logs</td>
+        <td>57</td>
+        <td>31400</td>
+    </tr>
+    <tr>
+        <td>Kas</td>
+        <td>54</td>
+        <td>25000</td>
+    </tr>
+</table> -->

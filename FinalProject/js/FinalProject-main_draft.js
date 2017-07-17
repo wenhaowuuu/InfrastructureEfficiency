@@ -1,41 +1,25 @@
 //////////////////////////////////////PART 1  MAP SET UP////////////////////////////////////////////////////
-//1.0 SET UP BASEMAPS IN ARCGIS ONLINE
-// REFERENCE FOR ARCGIS ONLINE LOADING MAPS
-// https://github.com/Esri/esri-leaflet-doc/blob/master/src/pages/api-reference/layers/tiled-map-layer.md
-// http://patrickarlt.com/esri-leaflet/api-reference/layers/tiled-map-layer.html
-// http://zevross.com/blog/2014/04/25/adding-arcgis-map-services-to-your-map-using-leaflet/
+//1.0 SET UP THE ARCGIS ONLINE MAP
+// var map2 = L.map('map2', {
+//   center: [15.162820, -87.509107],
+//   zoom: 6.5
+// });
 
-$('#ARCGIS').click(function(){
-  $('#map0').hide();
-  $('#map').hide();
-  $('#map2').show();
-  var map2 = L.map('map2').setView([15.162820, -87.509107], 6);
+// L.esri.tiledMapLayer({
+//   url: 'https://services.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer',
+//   maxZoom: 15
+// }).addTo(map2);
 
-  L.esri.tiledMapLayer({
-    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer',
-    maxZoom: 15
-  }).addTo(map2);
-
-  var parks = L.esri.featureLayer({
-          url: "https://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0",
-          style: function () {
-            return { color: "#0000ff", weight: 2 };
-          }
-        }).addTo(map2);
-
-        var popupTemplate = "<h3>{NAME}</h3>{ACRES} Acres<br><small>Property ID: {PROPERTYID}<small>";
-
-        parks.bindPopup(function(e){
-          return L.Util.template(popupTemplate, e.feature.properties)
-        });
-});
-
-//EXAMPLE CODE OF LOADING PRE-RENDERED MAPS FROM ARCGIS ONLINE
+// var parks = L.esri.featureLayer({
+//         url: "https://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0",
+//         style: function () {
+//           return { color: "#70ca49", weight: 2 };
+//         }
+//       }).addTo(map2);
 
 
 
-
-//1.1 SET UP BASEMAPS LEAFLET
+//1.1 SET UP THE LEAFLET MAP
 var map = L.map('map', {
   center: [15.162820, -87.509107],
   zoom: 6.5
@@ -365,6 +349,7 @@ $('#AOI').click(function(){
  var eachFeatureFunction = function(layer) {
     layer.on('click', function (event) {
       //UPDATE THE EXCEL TABLE INFO TO BE DOWNLOADED
+      // id="exceltitle"
       $('#exceltitle').text(layer.feature.properties.m_name);
       //ZOOM TO THE SELECTED MUNICIPALITY
       map.fitBounds(layer.getBounds(),{
@@ -746,9 +731,8 @@ var tableToExcel = (function() {
   }
 })()
 
-$('#download2').click(function(){
+$('download2').click(function(){
   tableToExcel('testTable', 'W3C Example Table');
-  console.log("export");
 });
 
 

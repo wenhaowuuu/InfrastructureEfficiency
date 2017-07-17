@@ -16,7 +16,6 @@
   <!-- this one works!!! -->
   <!-- https://stackoverflow.com/questions/6955627/export-dynamic-html-table-to-excel-in-javascript-in-firefox-browser -->
     <input id ="download2" type="button" value="Export to Excel">
-
     <table id="testTable" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="2">
       <caption>PROFILE FOR MUNICIPALITY <p id="exceltitle"></p></caption>
       <colgroup align="center"></colgroup>
@@ -55,60 +54,6 @@
 <!-- MIT COMMERCIAL USE LICENSE AVAILABLE -->
 <!-- https://github.com/bpampuch/pdfmake -->
 <!-- https://stackoverflow.com/questions/742271/generating-pdf-files-with-javascript -->
-
-
-
-<!-- TEST0.2 -->
-    <!-- <head>
-      <script type="text/javascript">
-    function CreateExcelSheet() {
-        var x = myTable.rows;
-
-        var xls = new ActiveXObject("Excel.Application");
-            xls.visible = true;
-            xls.Workbooks.Add;
-        for (i = 0; i < x.length; i++) {
-            var y = x[i].cells;
-            for (j = 0; j < y.length; j++) {
-                xls.Cells( i+1, j+1).Value = y[j].innerText;
-            }
-        }
-    }
-    </script>
-</head>
-<body> -->
-
-<!-- <form>
-    <input type="button" onclick="CreateExcelSheet()" value="Create Excel Sheet">
-</form> -->
-
-<!-- <table id="myTable" border="2">
-    <tr>
-        <td>Name</td>
-        <td>GDP</td>
-        <td>POPULATION</td>
-    </tr>
-    <tr>
-        <td>Shivani</td>
-        <td>25</td>
-        <td>100000</td>
-    </tr>
-    <tr>
-        <td>Naren </td>
-        <td>28</td>
-        <td>90450</td>
-    </tr>
-    <tr>
-        <td>Logs</td>
-        <td>57</td>
-        <td>31400</td>
-    </tr>
-    <tr>
-        <td>Kas</td>
-        <td>54</td>
-        <td>25000</td>
-    </tr>
-</table> -->
 
 
 
@@ -291,9 +236,6 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li id = "dark"><a href="#">Dark</a></li>
               <li id = "light"><a href="#">Light</a></li>
-              <!-- <li id = "antique"><a href="#">Antique</a></li> -->
-              <!-- <li id = "eco"><a href="#">Eco</a></li> -->
-              <!-- <li id = "midnight"><a href="#">Midnight</a></li> -->
               <li id = "satellite"><a href="#">Satellite</a></li>
           </ul>
       </div>
@@ -341,45 +283,6 @@
         <br>
       </div>
 
-<!--
-https://stackoverflow.com/questions/6517106/how-to-pass-html-table-values-to-excel-sheet-cells
-<script type="text/javaScript">
- //导出到Excel
- function exportToExcel() {
-  if(document.getElementById("title")) {
-   try {
-    var oRangeRef = document.body.createTextRange();
-    oRangeRef.execCommand("Copy");
-    var appExcel = new ActiveXObject("Excel.Application");
-    appExcel.visible = true;
-    appExcel.Workbooks.Add().WorkSheets.Item(1).Paste();
-   } catch(e) {
-    alert("出错啦！可能是浏览器或者是数据量太大咯哦！");
-    return;
-   }
-   appExcel = null;
-   oRangeRef = null;
-  }
- }
-
- //打印
- function print() {
-  if(document.getElementById("title")) {
-   var export = document.getElementById("export");
-   var print = document.getElementById("print");
-   try {
-    export.style.display = "none";
-    print.style.display = "none";
-    document.all.WebBrowser.ExecWB(6,1);
-   } catch(e) {
-    alert("出错啦！可能是浏览器或者是数据量太大咯哦！");
-    return;
-   }
-   export.style.display = "";
-   print.style.display = "";
-  }
- }
-</script> -->
 
 <!-- //ORIGINAL CHINESE PROVINCES GDP GROWTH RATES -->
       <!-- <div class="legend">
@@ -437,24 +340,28 @@ https://stackoverflow.com/questions/6517106/how-to-pass-html-table-values-to-exc
     <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
     <!-- <script src="js/MidTerm-setup.js"></script> -->
     <!-- <script src="js/bootstrap.js"></script> -->
-    <script src="js/decode.js"></script>
+    <!-- <script src="js/decode.js"></script> -->
     <script src="js/FinalProject-main_draft.js"></script>
+    <!-- <script src="archive/FinalProject-main_draft0713.js"></script> -->
     <!-- <script src="js/MidTerm-Functions.js"></script> -->
 
-    <!-- //LOAD ESRI LEAFLET LIBRARY -->
+
+    <!-- load ESRI MAPS -->
     <script src="https://unpkg.com/esri-leaflet@2.0.8"
     integrity="sha384-ze7rgny7/YGFxBlVgTBdOABNWe5V9BYjju/qwqJhCU8XJHtuEnRlbUpN5lXyY706"
     crossorigin=""></script>
 
 
+
+
     <!-- SET UP FOR HIGHLIGHTING CLICK FUNCTION -->
-    <script src="./src/leaflet.js"></script>
+    <!-- <script src="./src/leaflet.js"></script>
     <script src="./src/L.Control.MousePosition.js"></script>
     <script src="./src/leaflet.label.js"></script>
     <script src="./src/Leaflet.Coordinates-0.1.3.min.js"></script>
     <script src="./src/L.Grid.js"></script>
     <script src="./src/Tanks.js"></script>
-    <script src="./src/Feeders.js"></script>
+    <script src="./src/Feeders.js"></script> -->
 
 
   </body>
